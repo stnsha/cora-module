@@ -37,7 +37,7 @@ final class Entitlement
     public const EXPIRED = 'EXPIRED';
     public const LIMIT_EXHAUSTED = 'LIMIT EXHAUSTED';
 
-    /** Status -> pill class on the pages. */
+    /** Status -> pill class on the pages (plus cora-pill-caps: the labels are upper case). */
     public const PILLS = [
         self::ACTIVE          => 'cora-pill-success',
         self::INACTIVE        => 'cora-pill-secondary',
@@ -78,7 +78,7 @@ final class Entitlement
 
         return [
             'status'          => $status,
-            'status_pill'     => self::PILLS[$status],
+            'status_pill'     => self::PILLS[$status] . ' cora-pill-caps',
             'eligible'        => $status === self::ACTIVE,
             'limit'           => $limit,
             'limit_source'    => $limitSource,

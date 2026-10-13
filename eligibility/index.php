@@ -81,7 +81,7 @@ $page_js = CORA_BASE . 'eligibility/eligibility.js';
 
     <div class="row g-3 mb-3">
         <div class="col-md-6">
-            <div class="cora-card h-100">
+            <div class="cora-card cora-info-card h-100">
                 <h6 class="cora-card-title"><i class="bi bi-calendar-range"></i> Entitlement</h6>
                 <p class="mb-1 small"><strong>Period:</strong> <span id="cora-card-period"></span></p>
                 <p class="mb-1 small"><strong>Company category:</strong> <span id="cora-card-category"></span></p>
@@ -89,14 +89,14 @@ $page_js = CORA_BASE . 'eligibility/eligibility.js';
             </div>
         </div>
         <div class="col-md-6">
-            <div class="cora-card h-100">
+            <div class="cora-card cora-info-card h-100">
                 <h6 class="cora-card-title"><i class="bi bi-card-checklist"></i> Benefit / Claim Criteria</h6>
                 <div class="small" id="cora-card-criteria" style="white-space:normal;"></div>
                 <div class="text-muted small mt-1" id="cora-card-criteria-source"></div>
             </div>
         </div>
         <div class="col-12">
-            <div class="cora-card">
+            <div class="cora-card cora-info-card">
                 <h6 class="cora-card-title"><i class="bi bi-building"></i> Company General Remark</h6>
                 <div class="small" id="cora-card-remark"></div>
                 <div class="text-muted small mt-1" id="cora-card-remark-source"></div>

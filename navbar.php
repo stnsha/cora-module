@@ -79,7 +79,7 @@ $cora_nav = [
         'label' => 'Employees',
         'gate'  => 'admin',
         'items' => [
-            ['folder' => 'employees', 'file' => 'index.php', 'label' => 'Employee Master'],
+            ['folder' => 'employees', 'file' => 'index.php', 'label' => 'Employee Master', 'files' => ['edit.php']],
             ['folder' => 'employees', 'file' => 'import.php', 'label' => 'Upload Employees'],
         ],
     ],

@@ -212,6 +212,14 @@ button {
   font-weight: 500;
 }
 
+/* page.css sets span { font-size: 15px; font-family: Arial }, so a button
+   label wrapped in a span (claims/view.php Edit / Cancel Claim) grew larger
+   than the other buttons. Spans follow the button. */
+.btn span {
+  font-size: inherit;
+  font-family: inherit;
+}
+
 .btn-primary {
   background-color: #0d6efd;
   border-color: #0d6efd;
@@ -494,6 +502,13 @@ button {
 
 .cora-page-title .cora-pill {
   margin-left: 8px;
+}
+
+/* Eligibility pills are upper case ("ACTIVE", "LIMIT EXHAUSTED"); at 13px
+   bold they tower over the 13px text beside them. Entitlement adds this
+   class to every eligibility pill. */
+.cora-pill.cora-pill-caps {
+  font-size: 11px;
 }
 
 .cora-pill-draft {
@@ -857,6 +872,47 @@ button {
   color: #212529;
   vertical-align: middle;
   text-align: left;
+}
+
+/* Legacy common/css/page.css sets span { font-size: 15px; font-family: Arial },
+   so a span in a cell ("Not linked", "Default", ...) renders larger than the
+   cell text. Spans follow the cell; .small keeps its own smaller size. */
+.cora-view-tbl td span:not(.small):not(.cora-pill) {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+/* Label / value detail tables (claims/view.php Transaction, Employee).
+   page.css sets th, td and span to 15px, so pin them to the 13px body size. */
+.cora-kv-tbl th,
+.cora-kv-tbl td,
+.cora-kv-tbl td span:not(.small):not(.cora-pill) {
+  font-size: 13px;
+  font-family: inherit;
+}
+
+
+/* Eligibility Checker info cards (Entitlement, Benefit / Claim Criteria,
+   Company General Remark): one 13px size for labels, values and the
+   "Set on ..." source line; page.css would make the value spans 15px. */
+.cora-info-card .small,
+.cora-info-card .small span {
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* Same 10px gap below the title divider as above it (the title has no
+   margin, so the first line sat right under the line). */
+.cora-info-card .cora-card-title,
+.cora-rules .cora-card-title {
+  margin-bottom: 10px;
+}
+
+/* Company Entitlement Rules card (claims/view.php): "None recorded." spans
+   follow the .small text instead of page.css's 15px span. */
+.cora-rules span {
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .cora-view-tbl tbody tr:nth-child(odd) {

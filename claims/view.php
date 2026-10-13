@@ -39,7 +39,7 @@ $cora_review = ($_GET['review'] ?? '') === '1' && $cora_is_admin;
         <div class="col-lg-6">
             <div class="cora-card h-100">
                 <h6 class="cora-card-title"><i class="bi bi-receipt"></i> Transaction</h6>
-                <table class="table table-sm mb-0 small"><tbody id="cora-cv-txn"></tbody></table>
+                <table class="table table-sm mb-0 cora-kv-tbl"><tbody id="cora-cv-txn"></tbody></table>
             </div>
         </div>
         <div class="col-lg-6">
@@ -47,7 +47,7 @@ $cora_review = ($_GET['review'] ?? '') === '1' && $cora_is_admin;
                 <h6 class="cora-card-title"><i class="bi bi-person-badge"></i> Employee</h6>
                 <div id="cora-cv-restriction" class="alert alert-danger py-2 px-3 small" hidden></div>
                 <div id="cora-cv-info" class="alert alert-info py-2 px-3 small" hidden></div>
-                <table class="table table-sm mb-0 small"><tbody id="cora-cv-emp"></tbody></table>
+                <table class="table table-sm mb-0 cora-kv-tbl"><tbody id="cora-cv-emp"></tbody></table>
             </div>
         </div>
     </div>
@@ -85,11 +85,11 @@ $cora_review = ($_GET['review'] ?? '') === '1' && $cora_is_admin;
 
     <div class="row g-3 mb-3">
         <div class="col-lg-6">
-            <div class="cora-card h-100">
+            <div class="cora-card h-100 cora-rules">
                 <h6 class="cora-card-title"><i class="bi bi-card-checklist"></i> Company Entitlement Rules</h6>
-                <p class="small mb-1"><strong>Category:</strong> <span id="cora-cv-category"></span></p>
+                <div class="small mb-2" id="cora-cv-category"></div>
                 <div class="small" id="cora-cv-criteria"></div>
-                <hr>
+                <hr class="my-2">
                 <div class="small" id="cora-cv-remark"></div>
             </div>
         </div>

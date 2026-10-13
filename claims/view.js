@@ -102,7 +102,7 @@
             ? 'available at submission ' + Cora.money(c.available_snapshot) + ' (limit ' + Cora.money(c.limit_snapshot) + ')'
             : 'not submitted yet';
 
-        el('cora-cv-category').textContent = rules.category || '-';
+        el('cora-cv-category').innerHTML = '<strong>Category:</strong><br>' + Cora.esc(rules.category || '-');
         el('cora-cv-criteria').innerHTML = '<strong>Benefit / claim criteria:</strong><br>' + (rules.benefit_criteria ? Cora.lines(rules.benefit_criteria) : '<span class="text-muted">None recorded.</span>');
         el('cora-cv-remark').innerHTML = '<strong>General remark:</strong><br>' + (rules.general_remark ? Cora.lines(rules.general_remark) : '<span class="text-muted">None recorded.</span>');
 

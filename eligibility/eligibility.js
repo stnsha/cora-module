@@ -105,7 +105,7 @@
             ' &middot; IC / Passport ' + Cora.esc(e.ic_no) +
             (e.employee_no ? ' &middot; Employee ID ' + Cora.esc(e.employee_no) : '') +
             (e.department ? ' &middot; ' + Cora.esc(e.department) : '');
-        el('cora-card-status').innerHTML = '<span class="cora-pill ' + ent.status_pill + '" style="font-size:13px;padding:4px 12px;">' + Cora.esc(ent.status) + '</span>';
+        el('cora-card-status').innerHTML = Cora.pill(ent.status_pill, ent.status);
 
         el('cora-card-limit').textContent = Cora.money(ent.limit);
         el('cora-card-limit-source').textContent = SOURCE[ent.limit_source] || ent.limit_source;
