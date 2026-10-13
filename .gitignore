@@ -1,0 +1,19 @@
+# Dependencies
+/vendor
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Editor / OS
+/.idea
+/.vscode
+/.fleet
+.DS_Store
+Thumbs.db
+
+CLAUDE.md

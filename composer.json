@@ -1,0 +1,17 @@
+{
+    "name": "alpro/odb-cora",
+    "description": "CORA - Alpro Corporate DirectClaim Portal (eligibility, entitlement and claim management) for odb",
+    "type": "project",
+    "require": {
+        "php": ">=8.1",
+        "phpoffice/phpspreadsheet": "^1.29"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cora\\": "app/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

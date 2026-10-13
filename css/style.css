@@ -1,0 +1,3942 @@
+/* ATEM Module - Base Layout Styles */
+/* Custom classes use the cora- prefix. Visual language mirrors the */
+/* consultcall module (Bootstrap 5 + Inter font + white rounded panels). */
+
+/* ---------------------------------------------------------------
+   Base typography
+--------------------------------------------------------------- */
+* {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: "Inter", sans-serif;
+}
+
+/* Force Inter on the ODB page header box reused by atem pages */
+.headerH1 {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+}
+
+/* Keep Inter consistent inside the atem container */
+.cora-container,
+.cora-container * {
+  font-family: "Inter", sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Navigation Bar
+--------------------------------------------------------------- */
+.cora-nav {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(19, 92, 170, 0.1);
+  padding: 0.5rem 1rem;
+}
+
+.cora-nav .navbar-nav {
+  gap: 0.5rem;
+}
+
+.cora-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c757d;
+  padding: 0 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.cora-nav .nav-link:hover {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.cora-nav .nav-link.active {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+  font-weight: 600;
+}
+
+/* "New ATEM" navbar button - Alpro Blue (matches the ATEM header background) */
+.cora-nav .cora-btn-new {
+  height: 38px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 1rem;
+  border-radius: 6px;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #003b73, #0a5aa8);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 59, 115, 0.25);
+}
+
+.cora-nav .cora-btn-new:hover,
+.cora-nav .cora-btn-new:focus {
+  background: linear-gradient(90deg, #00305f, #094f93);
+  color: #ffffff;
+  box-shadow: 0 3px 9px rgba(0, 59, 115, 0.35);
+}
+
+.cora-nav .cora-btn-new .bi {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* On mobile the navbar stacks vertically; let the button sit inline-left */
+@media (max-width: 991.98px) {
+  .cora-nav .cora-btn-new {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Grouped dropdowns (GetResponse-parity nav) */
+.cora-nav .nav-link.dropdown-toggle {
+  gap: 0.35rem;
+}
+
+.cora-nav .dropdown-menu {
+  border: 1px solid rgba(19, 92, 170, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(19, 92, 170, 0.14);
+  padding: 0.35rem;
+  margin-top: 0.35rem;
+  font-size: 13px;
+}
+
+.cora-nav .dropdown-item {
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.cora-nav .dropdown-item:hover,
+.cora-nav .dropdown-item:focus {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.cora-nav .dropdown-item.active {
+  color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.1);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------
+   Main Container - ODB Integration
+--------------------------------------------------------------- */
+.cora-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 25px 35px 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(19, 92, 170, 0.1);
+}
+
+/* Flex items default to min-width:auto, so a wide child (e.g. a table with
+   long badge/text content) refuses to shrink and pushes the whole page past
+   the viewport instead of scrolling inside its own .table-responsive. */
+.cora-container > * {
+  min-width: 0;
+}
+
+/* Page header title (title only, left aligned) */
+.cora-page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------
+   Cards (title only)
+--------------------------------------------------------------- */
+.cora-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cora-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cora-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+  text-align: left;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* ---------------------------------------------------------------
+   Shared form / button styles (match consultcall for future content)
+--------------------------------------------------------------- */
+.btn {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 6px;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-secondary {
+  border-radius: 6px;
+}
+
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 6px;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+  border-radius: 6px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Icon-only row actions (list table Action column: edit / delete) */
+.cora-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* Quill rich-text editor (https://quilljs.com) - email creator body, template
+   HTML field. Quill's own snow theme provides toolbar/border chrome; only the
+   editable area's height needs setting per context. */
+#cora-eb-quill .ql-editor {
+  min-height: 45vh;
+  font-size: 13px;
+}
+
+.cora-quill-field .ql-editor {
+  min-height: 200px;
+  font-size: 13px;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 12px;
+  color: #495057;
+  text-align: left;
+  display: block;
+}
+
+.form-check-label {
+  font-size: 12px;
+  color: #495057;
+}
+
+.form-control,
+.form-select {
+  border-radius: 6px;
+  border-color: #ced4da;
+  font-size: 13px;
+  font-weight: 400;
+  height: 38px;
+  padding: 0.375rem 0.75rem;
+}
+
+/* Keep room for the dropdown chevron (Bootstrap reserves 2.25rem on the right)
+   and truncate long option labels with an ellipsis instead of letting the text
+   overflow across the arrow. */
+.form-select:not([size]),
+.form-select[size="1"] {
+  padding-right: 2.25rem;
+  text-overflow: ellipsis;
+}
+
+/* Multi-row list boxes (e.g. the department picker uses size="6") must grow to
+   fit their rows rather than being clamped to the single-line control height. */
+.form-select[size]:not([size="1"]) {
+  height: auto;
+  padding-right: 0.75rem;
+}
+
+.form-control::placeholder {
+  font-size: 13px;
+  font-weight: 400;
+  color: #adb5bd;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* ---------------------------------------------------------------
+   Create form - bento layout
+--------------------------------------------------------------- */
+.cora-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  /* Stretch so the left ATEM Details card matches the right column height. */
+  align-items: stretch;
+}
+
+.cora-bento-item {
+  grid-column: span 12;
+  min-width: 0;
+}
+
+.cora-span-8 {
+  grid-column: span 8;
+}
+
+.cora-span-4 {
+  grid-column: span 4;
+}
+
+.cora-span-6 {
+  grid-column: span 6;
+}
+
+/* Right column: lay the stacked cards vertically and let the last card grow so
+   the column bottom always aligns with the taller ATEM Details card. */
+.cora-bento-item.cora-span-4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.cora-bento-item.cora-span-4 > .cora-card:last-child {
+  flex: 1 1 auto;
+}
+
+.cora-span-12 {
+  grid-column: span 12;
+}
+
+.cora-hidden {
+  display: none !important;
+}
+
+/* Staff Type selector (create.php) */
+.cora-staff-type-options {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.cora-staff-type-btn {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 0.2rem 0.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cora-staff-type-btn .bi {
+  font-size: 12px;
+}
+
+/* Legacy common/css/page.css sets span { font-size: 15px; font-family: Arial },
+   which overrides the label span's size/family independent of the button's own
+   font-size. Pin it back to match the surrounding form labels. */
+.cora-staff-type-label {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+}
+
+.cora-staff-type-btn:hover {
+  border-color: #86b7fe;
+}
+
+.cora-staff-type-btn.active {
+  background-color: #e7f1ff;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.cora-req {
+  color: #dc3545;
+  /* The legacy common/css/page.css sets span { font-size: 15px }, which inflates
+       this asterisk and the label's line height, pushing fields with a required
+       marker lower than their row neighbours. Pin it to the label size. */
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+/* Left-align everything inside the create form by default */
+.cora-container,
+.cora-container h1,
+.cora-container h2,
+.cora-container h3,
+.cora-container h4,
+.cora-container h5,
+.cora-container h6,
+.cora-container p,
+.cora-container label,
+.cora-container span,
+.cora-container div,
+.cora-container .form-label,
+.cora-container .form-control,
+.cora-container .form-select,
+.cora-container .form-check-label {
+  text-align: left;
+}
+
+/* Card title with leading icon */
+.cora-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cora-card-title .bi {
+  color: #0a5aa8;
+  font-size: 16px;
+}
+
+.cora-card-hint {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 6px 0 0;
+}
+
+/* record_state pill. NOTE: do not use the Bootstrap .badge class here - the
+   legacy common/css/page.css defines .badge as an absolutely-positioned
+   notification dot, which would hijack it. Use a dedicated .cora-pill. */
+.cora-pill {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  line-height: 1.4;
+  color: #ffffff;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.cora-page-title .cora-pill {
+  margin-left: 8px;
+}
+
+.cora-pill-draft {
+  background-color: #6c757d;
+}
+
+.cora-pill-created {
+  background-color: #198754;
+}
+
+.cora-pill-active {
+  background-color: #0d6efd;
+}
+
+.cora-pill-red {
+  background-color: #dc3545;
+}
+
+.cora-pill-yellow {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.cora-pill-green {
+  background-color: #198754;
+}
+
+/* Semantic aliases matching Bootstrap's text-bg-* names, for status/reason
+   pills built from data (cora-crud.js badges config, sender/campaign
+   status, etc). Never use Bootstrap's .badge for these - see the note above
+   .cora-pill. */
+.cora-pill-secondary {
+  background-color: #6c757d;
+}
+
+.cora-pill-success {
+  background-color: #198754;
+}
+
+.cora-pill-danger {
+  background-color: #dc3545;
+}
+
+.cora-pill-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.cora-pill-info {
+  background-color: #0dcaf0;
+  color: #212529;
+}
+
+.cora-pill-primary {
+  background-color: #0d6efd;
+}
+
+.cora-pill-dark {
+  background-color: #212529;
+}
+
+/* Progress update cards */
+.cora-progress-item {
+  border: 1px solid #dee2e6;
+  border-left: 4px solid #dee2e6;
+  border-radius: 6px;
+  padding: 12px 16px;
+  background: #fff;
+}
+
+.cora-progress-item-red {
+  border-left-color: #dc3545;
+}
+.cora-progress-item-yellow {
+  border-left-color: #ffc107;
+}
+.cora-progress-item-green {
+  border-left-color: #198754;
+}
+
+.cora-progress-form-item {
+  grid-column: 1 / -1;
+  background: #f8f9fa;
+}
+
+#cora-progress-wrap {
+  margin-top: 12px;
+}
+
+.cora-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .cora-progress-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .cora-progress-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cora-progress-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cora-progress-item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6c757d;
+  min-width: 18px;
+}
+
+.cora-progress-item-dates {
+  font-size: 13px;
+  font-weight: 500;
+  color: #343a40;
+}
+
+.cora-progress-item-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.cora-progress-item-remark {
+  font-size: 13px;
+  color: #495057;
+  margin-top: 8px;
+  padding-top: 8px;
+  padding-bottom: 6px;
+  border-top: 1px solid #f0f0f0;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.cora-progress-item-creator {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 6px;
+}
+
+.cora-progress-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+@media (max-width: 600px) {
+  .cora-progress-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cora-progress-form-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Status toggle button group */
+.cora-status-btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cora-status-btn {
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 2px solid;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  line-height: 1.4;
+  transition:
+    background-color 0.12s,
+    color 0.12s;
+}
+
+.cora-status-btn-red {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.cora-status-btn-red.cora-status-btn-on {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.cora-status-btn-yellow {
+  border-color: #e6ac00;
+  color: #856404;
+}
+.cora-status-btn-yellow.cora-status-btn-on {
+  background-color: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+}
+
+.cora-status-btn-green {
+  border-color: #198754;
+  color: #198754;
+}
+.cora-status-btn-green.cora-status-btn-on {
+  background-color: #198754;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------
+   Audit Log
+--------------------------------------------------------------- */
+#cora-audit-card .cora-card-title {
+  font-size: 13px;
+}
+#cora-audit-card .cora-card-hint {
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+#cora-audit-card .cora-audit-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #495057;
+}
+
+#cora-audit-card .cora-audit-meta-item {
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-meta-item strong {
+  color: #212529;
+  font-size: 12px;
+}
+
+.cora-audit-log {
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#cora-audit-card .cora-audit-entry {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-entry:last-child {
+  border-bottom: none;
+}
+
+.cora-audit-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  background: #f0f0f0;
+  color: #495057;
+}
+
+.cora-audit-created .cora-audit-icon {
+  background: #d1e7dd;
+  color: #0a3622;
+}
+.cora-audit-status_changed .cora-audit-icon {
+  background: #cfe2ff;
+  color: #084298;
+}
+.cora-audit-updated .cora-audit-icon {
+  background: #fff3cd;
+  color: #664d03;
+}
+.cora-audit-arci_added .cora-audit-icon {
+  background: #d1e7dd;
+  color: #0a3622;
+}
+.cora-audit-arci_removed .cora-audit-icon {
+  background: #f8d7da;
+  color: #58151c;
+}
+.cora-audit-attachment_added .cora-audit-icon {
+  background: #e2d9f3;
+  color: #3d0a91;
+}
+
+#cora-audit-card .cora-audit-body {
+  flex: 1;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-header {
+  color: #6c757d;
+  margin-bottom: 3px;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-header span {
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-header strong,
+#cora-audit-card strong {
+  color: #212529;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-changes {
+  margin: 4px 0 0;
+  padding-left: 16px;
+  list-style: disc;
+  color: #495057;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-changes li {
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+#cora-audit-card .cora-audit-summary {
+  color: #495057;
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------------
+   ATEM listing
+--------------------------------------------------------------- */
+.cora-view-tbl {
+  margin-bottom: 0;
+}
+
+.cora-view-tbl th {
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+  text-align: left;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.cora-view-tbl td {
+  font-size: 13px;
+  color: #212529;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.cora-view-tbl tbody tr:nth-child(odd) {
+  background-color: #fbfcfe;
+}
+
+.cora-view-tbl tbody tr:hover {
+  background-color: #eef6ff;
+}
+
+.cora-sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.cora-sortable::after {
+  content: '\2195';
+  margin-left: 5px;
+  font-size: 11px;
+  color: #ced4da;
+  vertical-align: middle;
+}
+
+.cora-sortable.cora-sort-asc::after {
+  content: '\2191';
+  color: #0d6efd;
+}
+
+.cora-sortable.cora-sort-desc::after {
+  content: '\2193';
+  color: #0d6efd;
+}
+
+.cora-sortable:hover {
+  color: #0a5aa8;
+}
+
+.cora-view-tbl th[data-col="title"] {
+  width: 320px;
+}
+
+.cora-view-tbl th[data-col="issuer_name"] {
+  width: 150px;
+}
+
+.cora-view-tbl th[data-col="start_date"],
+.cora-view-tbl th[data-col="end_date"],
+.cora-view-tbl th[data-col="closure_date"] {
+  width: 110px;
+}
+
+.cora-id {
+  font-family: monospace;
+  font-size: 12px;
+  color: #0a5aa8;
+  background: #eef3f9;
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.cora-view-actions {
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Filter bar: keep the controls at the table font size */
+.cora-filter .form-select,
+.cora-filter .form-control,
+.cora-filter .btn {
+  font-size: 13px;
+}
+
+/* Pager */
+.cora-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.cora-pager-bar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.cora-pager-btn {
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  color: #495057;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.cora-pager-btn:hover:not(:disabled) {
+  background: #eef6ff;
+  border-color: #0a5aa8;
+  color: #0a5aa8;
+}
+
+.cora-pager-btn.active {
+  background: #0a5aa8;
+  border-color: #0a5aa8;
+  color: #ffffff;
+}
+
+.cora-pager-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cora-pager-gap {
+  padding: 0 4px;
+  color: #adb5bd;
+}
+
+.cora-pager-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #495057;
+}
+
+.cora-perpage-select {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 3px 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------
+   Dashboard stat cards
+--------------------------------------------------------------- */
+/* Card itself becomes a column flex container so the value always sits
+   right after the (fixed-height) title, and the label can be pinned to
+   the bottom via margin-top:auto - regardless of how many lines the
+   title or the label wrap to. Combined with Bootstrap's h-100 (stretch
+   in a row g-3), every card in a row ends up the same height too. */
+.cora-dash-stat,
+.cora-dash-stat-outlet {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fixed to exactly 2 lines' worth of height (line-height 1.5 x 2, plus
+   the title's own padding-bottom/border) so a 1-line title ("Suspended")
+   and a 2-line title ("Complete + Excellence") reserve identical space -
+   the value below always starts at the same Y regardless of title length. */
+.cora-dash-stat .cora-card-title,
+.cora-dash-stat-outlet .cora-card-title {
+  min-height: calc(2 * 1.5em + 10px + 1px);
+  align-items: flex-start;
+  flex-shrink: 0;
+  /* Override Bootstrap's mb-1 (0.25rem) so the gap below the divider
+     matches the title's own 10px padding-bottom above it. */
+  margin-bottom: 10px;
+}
+
+.cora-dash-stat .cora-stat-label,
+.cora-dash-stat-outlet .cora-stat-label {
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.cora-stat-value {
+  padding-top: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.cora-stat-value--blue   { color: #0d6efd; }
+.cora-stat-value--green  { color: #198754; }
+.cora-stat-value--red    { color: #dc3545; }
+.cora-stat-value--orange { color: #fd7e14; }
+
+.cora-stat-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* ---------------------------------------------------------------
+   Dashboard closure bar chart
+--------------------------------------------------------------- */
+.cora-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.cora-bar-label {
+  width: 90px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.cora-bar-track {
+  flex: 1;
+  background: #e9ecef;
+  border-radius: 4px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.cora-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.cora-bar-count {
+  width: 35px;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cora-pager-info {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Reset button matches the small search input height */
+.cora-reset-btn {
+  height: 31px;
+}
+
+/* Issuer/Department are always non-editable display fields */
+#cora-issuer[readonly],
+#cora-department[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+/* Edit/View read-mode: grey disabled + readonly fields and the Quill editor */
+.cora-mode-read input[disabled],
+.cora-mode-read select[disabled],
+.cora-mode-read input[readonly],
+.cora-mode-read textarea[disabled] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+.cora-mode-read .ql-toolbar {
+  display: none;
+}
+
+.cora-mode-read #cora-description-editor.ql-container {
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+#cora-description-editor.ql-container.ql-disabled {
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+/* Suspended card, Issuer view: Title and Description stay editable even though
+   the rest of the card is read-only, so restore the toolbar and normal
+   background for the description editor here. */
+.cora-mode-read.cora-suspended-desc-edit .ql-toolbar {
+  display: block;
+}
+
+.cora-mode-read.cora-suspended-desc-edit #cora-description-editor.ql-container {
+  background-color: #fff;
+}
+
+.cora-mode-read.cora-suspended-desc-edit #cora-description-editor.ql-container.ql-disabled {
+  background-color: #fff;
+}
+
+/* Page intro line under the ODB header title */
+.cora-page-hint {
+  font-size: 13px;
+  color: #6c757d;
+  margin-top: 4px;
+  text-align: left;
+}
+
+/* Incentive panel */
+.cora-incentive {
+  margin-top: 14px;
+}
+
+.cora-incentive-total-block {
+  background: linear-gradient(90deg, #003b73, #0a5aa8);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #ffffff;
+}
+
+.cora-incentive-total-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cora-incentive-total-amount {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 2px;
+  color: #ffffff;
+}
+
+.cora-incentive-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cora-incentive-stat {
+  background-color: #f8f9fa;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.cora-incentive-stat-label {
+  display: block;
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.cora-incentive-stat-value {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #212529;
+  margin-top: 2px;
+}
+
+.cora-incentive-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #6c757d;
+  background-color: #fff8f0;
+  border: 1px solid #ffe7c2;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* ARCI */
+.cora-arci-add {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0 16px;
+}
+
+.cora-arci-add-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 2fr;
+  gap: 12px;
+  /* Stretch columns so the Department list and Staff list bottoms align with
+       the Add Selected button. */
+  align-items: stretch;
+}
+
+.cora-arci-add-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Department list box fills its column down to the Add Selected button. */
+#arci-dept-select {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 120px;
+  padding: 4px;
+}
+
+#arci-dept-select option {
+  padding: 6px 8px;
+}
+
+.cora-arci-staff-list {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 8px;
+  /* Fixed height with scroll: a department can have hundreds of staff, so the
+       list keeps a steady height and scrolls instead of growing to fit all. */
+  height: 240px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.cora-arci-staff-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cora-arci-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cora-arci-col {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cora-arci-col-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 13px;
+}
+
+.cora-arci-members {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 90px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.cora-arci-member {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.cora-arci-member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cora-arci-member-dept {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.cora-arci-member-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #212529;
+  word-break: break-word;
+}
+
+.cora-arci-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cora-arci-empty {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+  text-align: center;
+  padding: 12px 0;
+}
+
+.cora-arci-incentivised {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #6c757d;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.cora-arci-incentivised input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+}
+
+.cora-arci-incentivised-badge {
+  display: inline-block;
+  font-size: 10px;
+  color: #198754;
+  border: 1px solid #198754;
+  border-radius: 3px;
+  padding: 1px 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Extension fields helper */
+.cora-ext-field {
+  transition: opacity 0.15s ease;
+}
+
+/* Outlet tagging picker (create.php outlet-staff flow) */
+.cora-outlet-picker {
+  position: relative;
+}
+
+.cora-outlet-picker-btn {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  height: 38px;
+  padding: 0.375rem 0.75rem;
+  font-size: 13px;
+  color: #495057;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.cora-outlet-picker-btn:hover,
+.cora-outlet-picker-btn:focus {
+  border-color: #86b7fe;
+  outline: none;
+}
+
+.cora-outlet-picker-dropdown {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cora-outlet-picker-dropdown.open {
+  display: block;
+}
+
+.cora-outlet-picker-search-wrap {
+  padding: 6px 6px 4px;
+}
+
+.cora-outlet-picker-search {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 13px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 4px 8px;
+  outline: none;
+}
+
+.cora-outlet-picker-search:focus {
+  border-color: #86b7fe;
+}
+
+.cora-outlet-picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.cora-outlet-picker-list li {
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cora-outlet-picker-list li:hover {
+  background-color: #f8f9fa;
+}
+
+.cora-outlet-picker-list li.selected {
+  background-color: #e7f1ff;
+  color: #0d6efd;
+}
+
+.cora-outlet-picker-list li.hidden {
+  display: none;
+}
+
+.cora-outlet-picker-empty {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.cora-outlet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cora-outlet-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #495057;
+}
+
+.cora-outlet-tag-remove {
+  color: #dc3545;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Incentive approval radio group in Timeline card */
+#tl-incentive-approval-wrap .form-check-label,
+#tl-incentive-approval-wrap .form-check-label span {
+  font-size: 12px;
+  color: #495057;
+}
+#tl-incentive-approval-wrap .form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #adb5bd;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Timeline save reminder */
+.cora-tl-reminder {
+  font-size: 12px;
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* Two-click confirm state for the ARCI Delete All button */
+.cora-arci-clear-confirm {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* Armed state for an inline two-click remove control (the 'x' -> "confirm?") */
+.cora-confirm-x {
+  color: #dc3545;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* Quill RTE for the ATEM Description - matches the iidas editor styling */
+.ql-container {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  background: #fff;
+}
+
+/* Fixed height so the editor scrolls internally instead of growing the card.
+   Pinned to the id (specificity 1,1,0) because Quill core's .ql-container
+   { height: 100% } loads after style.css and would otherwise win. */
+#cora-description-editor.ql-container {
+  height: 350px;
+}
+
+.ql-editor {
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.ql-toolbar {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  background: #fafafa;
+}
+
+/* Save bar */
+.cora-save-error-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.cora-save-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Inline form error (small red text instead of system dialogs) */
+.cora-form-error {
+  font-size: 12px;
+  color: #dc3545;
+  margin-top: 6px;
+  min-height: 0;
+}
+
+/* Attachment dropzone */
+.cora-dropzone {
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+  margin-top: 12px;
+}
+
+.cora-dropzone:hover,
+.cora-dropzone-active {
+  border-color: #0a5aa8;
+  background-color: #f0f7ff;
+}
+
+.cora-dropzone-text {
+  font-size: 13px;
+  color: #495057;
+}
+
+.cora-dropzone-text a {
+  color: #0a5aa8;
+  text-decoration: underline;
+}
+
+.cora-dropzone-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #adb5bd;
+}
+
+/* Staged file rows and submitted attachment rows */
+.cora-file-list {
+  margin-top: 8px;
+}
+
+.cora-file-row,
+.cora-attachment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+.cora-file-name {
+  font-size: 13px;
+  color: #212529;
+  word-break: break-word;
+}
+
+.cora-file-size {
+  font-size: 11px;
+  color: #6c757d;
+  margin-left: auto;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.cora-file-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cora-reference-outcome-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid #ced4da;
+  color: #6c757d;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background-color: transparent;
+}
+
+.cora-reference-outcome-badge:hover {
+  background-color: #e9ecef;
+}
+
+.cora-reference-outcome-badge.cora-reference-outcome-active {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+.cora-reference-outcome-badge.cora-reference-outcome-active:hover {
+  background-color: #0b5ed7;
+}
+
+.cora-reference-outcome-badge.cora-reference-outcome-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Reference link rows */
+.cora-reflink-list {
+  margin-top: 4px;
+}
+
+.cora-reflink-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 0;
+}
+
+.cora-reflink-row .cora-reference-outcome-badge {
+  margin-left: auto;
+}
+
+/* Navbar notification bell. Dedicated ids/classes (#cora-notif-badge, .cora-notif-*)
+   NOT #badge/.badge/#myDropdown - those are dead legacy ids/classes rendered on
+   every page by common/lock_adv.php + common/css/page.css (see .cora-pill note above). */
+.cora-notif-dropdown .nav-link {
+  position: relative;
+}
+
+.cora-notif-badge {
+  position: absolute;
+  top: 2px;
+  right: -4px;
+  background: #dc3545;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 3px 5px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.cora-notif-menu {
+  width: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.cora-notif-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cora-notif-list {
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.cora-notif-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.cora-notif-item:hover {
+  background: #f8f9fa;
+}
+
+.cora-notif-item-unread {
+  background: #eef5ff;
+}
+
+.cora-notif-item-snippet {
+  font-size: 12px;
+}
+
+.cora-notif-item-time {
+  color: #6c757d;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.cora-notif-empty {
+  padding: 16px 12px;
+  color: #6c757d;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Chat section on edit.php */
+.cora-chat-wrap {
+  max-height: 360px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cora-chat-bubble {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  max-width: 80%;
+}
+
+.cora-chat-bubble-mine {
+  align-self: flex-end;
+  background: #eef5ff;
+}
+
+.cora-chat-bubble-header {
+  font-size: 12px;
+  color: #495057;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cora-chat-bubble-time {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.cora-chat-bubble-body {
+  font-size: 13px;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+.cora-chat-composer {
+  margin-top: 12px;
+}
+
+.cora-chat-composer-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cora-chat-bubble-actions {
+  margin-top: 6px;
+  display: flex;
+  gap: 12px;
+}
+
+.cora-chat-bubble-actions .btn-link {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.cora-chat-bubble-actions .btn-link:hover {
+  text-decoration: underline;
+}
+
+.cora-chat-edit-actions {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+/* Card header with a right-aligned action button (e.g. Add Reference Link) */
+.cora-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.cora-card-title-row .cora-card-title {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Ordered list of reference links */
+.cora-reflink-ol {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+
+.cora-reflink-ol li {
+  padding: 2px 0;
+}
+
+.cora-reflink-row a {
+  color: #0a5aa8;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.cora-reflink-remove {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Empty state for attachment / reference link lists */
+.cora-empty-state {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+  padding: 6px 0;
+}
+
+/* ---------------------------------------------------------------
+   Responsive Adjustments
+--------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .cora-span-8,
+  .cora-span-4,
+  .cora-span-6 {
+    grid-column: span 12;
+  }
+
+  .cora-arci-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cora-arci-add-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cora-card {
+    padding: 1rem;
+  }
+
+  .cora-container {
+    padding: 10px 15px 25px 10px;
+  }
+
+  .cora-arci-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Searchable select ("select2-lite") — used by the Issuer filter on
+   view.php and the Staff filter on index.php.
+--------------------------------------------------------------- */
+.vf-issuer-wrap { position: relative; }
+.vf-s2-selection {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 2.25rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius-sm);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: 'Inter', sans-serif;
+}
+.vf-s2-selection:focus,
+.vf-s2-selection:hover { outline: none; box-shadow: none; border-color: var(--bs-border-color); }
+.vf-s2-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    z-index: 9999;
+    display: none;
+}
+.vf-s2-dropdown.open { display: block; }
+.vf-s2-search-wrap { padding: 6px 6px 4px; }
+.vf-s2-search {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 4px 8px;
+    outline: none;
+}
+.vf-s2-search:focus { border-color: #86b7fe; }
+.vf-s2-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.vf-s2-list li {
+    padding: 6px 10px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+.vf-s2-list li:hover,
+.vf-s2-list li.active { background: #0d6efd; color: #fff; }
+.vf-s2-list li.hidden { display: none; }
+.vf-s2-empty { padding: 8px 10px; font-size: 12px; color: #6c757d; font-family: 'Inter', sans-serif; }
+
+.cora-view-tabs {
+    border-bottom: 1px solid #e9ecef;
+    gap: 28px;
+}
+.cora-view-tabs .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 2px 12px;
+    margin-bottom: -1px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    background: none;
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color .15s ease, border-color .15s ease;
+}
+.cora-view-tabs .nav-link:hover {
+    color: #495057;
+    border-color: transparent;
+    isolation: auto;
+}
+.cora-view-tabs .nav-link.active {
+    background: none;
+}
+.cora-view-tabs .nav-link.cora-tab-color-hq.active {
+    color: #fd7e14;
+    border-color: #fd7e14;
+}
+.cora-view-tabs .nav-link.cora-tab-color-outlet.active {
+    color: #0A5AA8;
+    border-color: #0A5AA8;
+}
+.cora-view-tabs .nav-link.cora-tab-color-payout.active {
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+.cora-view-tabs .nav-link.cora-tab-color-atem.active {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+.cora-view-tabs .nav-link.cora-tab-color-okr.active {
+    color: #20c997;
+    border-color: #20c997;
+}
+.cora-view-tabs .nav-link i {
+    font-size: 15px;
+}
+.cora-tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    padding: 1px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f1f3f5;
+    color: #6c757d;
+}
+.cora-view-tabs .nav-link.cora-tab-color-hq.active .cora-tab-count {
+    background: #fff1e6;
+    color: #fd7e14;
+}
+.cora-view-tabs .nav-link.cora-tab-color-outlet.active .cora-tab-count {
+    background: #e6eef7;
+    color: #0A5AA8;
+}
+.cora-view-tabs .nav-link.cora-tab-color-payout.active .cora-tab-count {
+    background: #f0e9fa;
+    color: #6f42c1;
+}
+
+/* ---------------------------------------------------------------
+   Newsletters (campaign/) - Preview modal
+--------------------------------------------------------------- */
+.cora-nl-preview-frame {
+    display: block;
+    width: 100%;
+    height: 75vh;
+    border: 0;
+    background: #fff;
+}
+
+/* ---------------------------------------------------------------
+   Email creator (email-builder/) - EmailBuilder.js iframe host
+--------------------------------------------------------------- */
+.cora-eb-frame-wrap {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f2f5f7;
+}
+.cora-eb-frame {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 160px);
+    min-height: 640px;
+    border: 0;
+}
+
+/* ---------------------------------------------------------------
+   Row action menu (every listing's Action column; js/cora-crud.js,
+   settings/senders.js, email-builder/index.php)
+--------------------------------------------------------------- */
+.cora-row-kebab {
+    border: 0;
+    background: none;
+    padding: 4px 8px;
+    font-size: 18px;
+    line-height: 1;
+    color: #6c757d;
+    border-radius: 4px;
+}
+.cora-row-kebab:hover,
+.cora-row-kebab[aria-expanded="true"] {
+    background: #f1f3f5;
+    color: #212529;
+}
+.cora-row-menu .dropdown-item {
+    padding: 7px 18px;
+    font-size: 13px;
+}
+
+/* Email creator heading bar (replaces the page title row) */
+.cora-eb-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding-bottom: 26px; /* room for the save status under the buttons */
+    border-bottom: 1px solid #e9ecef;
+}
+.cora-eb-back {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    color: #495057;
+    font-size: 18px;
+    text-decoration: none;
+    background: #fff;
+}
+.cora-eb-back:hover {
+    background: #eef6ff;
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+.cora-eb-heading {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+.cora-eb-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+.cora-eb-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6c757d;
+}
+.cora-eb-meta .bi {
+    margin-right: 4px;
+}
+.cora-eb-actions {
+    position: relative; /* anchors .cora-eb-state below the buttons */
+    margin-left: auto;
+}
+.cora-eb-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.cora-eb-state {
+    /* Out of flow, so the button row alone decides the bar height and the
+       title, status pill and buttons share one centre line. */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6c757d;
+    white-space: nowrap;
+}
+.cora-eb-state .bi-circle-fill {
+    font-size: 8px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+/* Email creator settings panel (above the builder) */
+.cora-eb-settings {
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background: #fbfcfe;
+}
+.cora-eb-settings .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+/* Email creator wizard (email-builder/index.php): stepper + one pane per
+   step (Setup, Recipients, Design, Review). */
+.cora-wiz-steps {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0 auto 24px;
+    max-width: 760px;
+}
+.cora-wiz-step {
+    position: relative;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #6c757d;
+    font-size: 13px;
+    cursor: pointer;
+}
+/* Connector line to the previous step */
+.cora-wiz-step + .cora-wiz-step::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: calc(50% + 24px);
+    left: calc(-50% + 24px);
+    height: 2px;
+    background: #dee2e6;
+}
+.cora-wiz-step.is-done + .cora-wiz-step::before,
+.cora-wiz-step.is-done + .cora-wiz-step.is-active::before {
+    background: #198754;
+}
+.cora-wiz-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #dee2e6;
+    border-radius: 50%;
+    background: #fff;
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color .15s, border-color .15s, color .15s;
+}
+.cora-wiz-step:hover .cora-wiz-dot {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+.cora-wiz-step.is-done .cora-wiz-dot {
+    border-color: #198754;
+    background: #198754;
+    color: #fff;
+}
+.cora-wiz-step.is-done .cora-wiz-label {
+    color: #198754;
+}
+.cora-wiz-step.is-active .cora-wiz-dot {
+    border-color: #0d6efd;
+    background: #0d6efd;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, .15);
+}
+.cora-wiz-step.is-active .cora-wiz-label {
+    color: #0d6efd;
+    font-weight: 600;
+}
+/* Set on the label itself: odb's shared page.css sizes bare spans, so the
+   button's font-size is not inherited. */
+.cora-wiz-step .cora-wiz-label {
+    font-size: 12px;
+}
+/* "(optional)" / "(required to reject)" after a form label. Two classes so
+   it beats odb page.css's bare span size. */
+.form-label .cora-label-hint {
+    font-size: 12px;
+}
+/* Email creator step 6 (Approval): readiness checks */
+.cora-eb-checks {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+.cora-eb-checks li {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 13px;
+}
+.cora-eb-checks li:last-child {
+    border-bottom: 0;
+}
+.cora-eb-checks li span {
+    font-size: 13px;
+}
+.cora-eb-checks .is-ok .bi {
+    color: #198754;
+}
+.cora-eb-checks .is-fail .bi {
+    color: #dc3545;
+}
+.cora-wiz-pane {
+    max-width: 760px;
+    margin: 0 auto 16px;
+}
+.cora-wiz-pane--wide {
+    max-width: none;
+}
+.cora-wiz-pane[hidden] {
+    display: none;
+}
+.cora-wiz-title {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.cora-wiz-sub {
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #6c757d;
+}
+.cora-wiz .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 4px;
+}
+.cora-wiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e9ecef;
+}
+.cora-wiz-design-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.cora-wiz-tools {
+    display: flex;
+    gap: 8px;
+}
+/* Review summary: label / value / Edit per row */
+.cora-wiz-summary {
+    margin: 0;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+}
+.cora-wiz-row {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 14px;
+    border-top: 1px solid #f1f3f5;
+}
+.cora-wiz-row:first-child {
+    border-top: 0;
+}
+.cora-wiz-row dt {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+}
+.cora-wiz-row dd {
+    margin: 0;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+/* Inline parts of a value ("None" placeholders) keep the value's size -
+   a legacy odb stylesheet otherwise resizes them. */
+.cora-wiz-row dd span {
+    font-size: inherit;
+}
+.cora-wiz-row.is-missing dd:not(.cora-wiz-row-edit) {
+    color: #b02a37;
+}
+.cora-wiz-row-edit .btn-link {
+    font-size: 13px;
+    text-decoration: none;
+}
+.cora-wiz-thumb {
+    max-width: 160px;
+    max-height: 90px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+}
+/* Three-step stepper (template editor) stays as compact as the five-step one */
+.cora-wiz-steps--3 {
+    max-width: 520px;
+}
+.cora-wiz-row-note {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-wiz-subtitle {
+    margin: 24px 0 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+/* Tracking toggles and Send "When" choices: one bordered row each */
+.cora-wiz-toggles,
+.cora-wiz-when {
+    display: grid;
+    gap: 8px;
+}
+.cora-wiz-when {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.cora-wiz-toggle,
+.cora-wiz-when-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
+.cora-wiz-when-opt:has(input:checked) {
+    border-color: #0d6efd;
+    background: #f4f8ff;
+}
+.cora-wiz-toggle .form-switch .form-check-input {
+    margin-left: -2.5em;
+}
+.cora-wiz-toggle .form-switch {
+    padding-left: 2.5em;
+}
+.cora-wiz-when-opt .form-check-input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    border: 2px solid #adb5bd;
+}
+.cora-wiz-when-opt .form-check-input:checked {
+    border-color: #0d6efd;
+}
+.cora-wiz-toggle-hint {
+    display: block;
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-wiz-example {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f4f6f8;
+    color: #495057;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+/* Preview message: inbox-style line above the email */
+.cora-wiz-inbox {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+    font-size: 13px;
+}
+.cora-wiz-inbox-from {
+    font-size: 12px;
+    color: #6c757d;
+}
+/* Newsletter tags: chip input (Email creator Setup) and list chips */
+.cora-tag-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 4px 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: #fff;
+    cursor: text;
+}
+.cora-tag-input:focus-within {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .15);
+}
+.cora-tag-input input {
+    flex: 1 1 120px;
+    min-width: 120px;
+    border: 0;
+    outline: 0;
+    padding: 4px 2px;
+    background: transparent;
+}
+.cora-tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 4px 2px 9px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #3949ab;
+    font-size: 13px;
+    white-space: nowrap;
+}
+.cora-tag-chip.is-new {
+    background: #fff8e1;
+    color: #8a6d00;
+    border: 1px dashed #e0c36a;
+}
+.cora-tag-chip button {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1;
+}
+.cora-tag-chip button:hover {
+    background: rgba(0, 0, 0, .08);
+}
+.cora-tag-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.cora-tag-chips .cora-tag-chip {
+    padding: 1px 8px;
+    font-size: 12px;
+}
+
+/* Recipients picker (js/cora-audience-picker.js) */
+.cora-aud-side {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background: #fff;
+}
+.cora-aud-side-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    margin-bottom: 8px;
+}
+.cora-aud-side-title {
+    font-size: 13px;
+    font-weight: 600;
+}
+.cora-aud-side-hint {
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-aud-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 28px;
+    margin-bottom: 10px;
+}
+.cora-aud-empty {
+    font-size: 13px;
+    color: #6c757d;
+    line-height: 28px;
+}
+.cora-aud-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px 3px 10px;
+    border-radius: 999px;
+    background: #e7f0ff;
+    color: #0b5ed7;
+    font-size: 13px;
+}
+.cora-aud-chip--exclude {
+    background: #fdecee;
+    color: #b02a37;
+}
+.cora-aud-chip-x {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font-size: 16px;
+    line-height: 1;
+}
+.cora-aud-chip-x:hover {
+    background: rgba(0, 0, 0, .08);
+}
+.cora-aud-results {
+    width: calc(100% - 12px);
+    max-height: 260px;
+    overflow-y: auto;
+}
+.cora-aud-result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 8px;
+    font-size: 13px;
+}
+.cora-aud-result-name {
+    color: #6c757d;
+    font-size: 12px;
+}
+.cora-aud-count {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f4f6f8;
+    font-size: 13px;
+}
+.cora-aud-count.is-ok {
+    background: #eef8f2;
+    color: #146c43;
+}
+.cora-aud-count.is-warn {
+    background: #fff8e1;
+    color: #664d03;
+}
+@media (max-width: 575.98px) {
+    .cora-wiz-when {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .cora-wiz-step .cora-wiz-label {
+        font-size: 11px;
+    }
+    .cora-wiz-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .cora-wiz-row dt {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Field help text under inputs in the cora-crud add / edit modal
+   (e.g. Custom fields > Options: "Ignored unless Type is select."). */
+#cora-crud-form .form-text {
+    font-size: 12px;
+}
+
+
+/* Contacts > Import contacts (audience/import.php) */
+/* Step 3 result line ("Import finished: ...") */
+#cora-imp-done-msg {
+    font-size: 12px;
+}
+
+/* Step breadcrumbs: pills with chevrons in a grey band */
+.cora-imp-steps-bar {
+    margin: 0 0 24px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f4f6f8;
+}
+.cora-imp-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: #6c757d;
+}
+.cora-imp-steps li[data-step] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 999px;
+    background: #f8f9fa;
+}
+.cora-imp-steps-sep {
+    color: #adb5bd;
+    font-size: 12px;
+}
+.cora-imp-step-dot {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #ced4da;
+    border-radius: 50%;
+    font-size: 10px;
+}
+.cora-imp-steps li.active {
+    border-color: #0a5aa8;
+    background: #fff;
+    color: #212529;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.cora-imp-steps li.active .cora-imp-step-dot {
+    border: 4px solid #0a5aa8;
+}
+.cora-imp-steps li.done {
+    color: #495057;
+}
+.cora-imp-steps li.done .cora-imp-step-dot {
+    border-color: #198754;
+    background: #198754;
+    color: #fff;
+}
+.cora-imp-steps li.done .cora-imp-step-dot::before {
+    content: "\F633"; /* bi-check-lg */
+    display: block;
+    font-family: "bootstrap-icons";
+    line-height: 1;
+}
+.cora-imp-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    gap: 4px;
+    padding: 32px 16px;
+    border: 2px dashed #ced4da;
+    border-radius: 10px;
+    background: #fbfcfe;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.cora-imp-drop:hover,
+.cora-imp-drop.is-over {
+    border-color: #0d6efd;
+    background: #eef6ff;
+}
+.cora-imp-drop.has-file {
+    border-color: #198754;
+    border-style: solid;
+}
+.cora-imp-drop .bi {
+    font-size: 32px;
+    color: #0a5aa8;
+}
+.cora-imp-drop-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-imp-drop-link {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+/* Paste box: same height as the drop zone (overrides the legacy odb
+   textarea height) */
+#cora-imp-paste {
+    height: 200px;
+    min-height: 200px;
+    resize: vertical;
+}
+.cora-imp-drop-hint {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6c757d;
+}
+/* Upload / check / import progress + log (audience/import.js) */
+.cora-imp-progress {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border: 1px solid #e3e8ef;
+    border-radius: 10px;
+    background: #fbfcfe;
+}
+.cora-imp-progress-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-imp-progress .progress {
+    height: 8px;
+}
+.cora-imp-progress-meta {
+    min-height: 18px;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-imp-log-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 10px 0 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+}
+.cora-imp-log {
+    max-height: 240px;
+    margin: 0;
+    padding: 6px 0;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    background: #fff;
+    list-style: none;
+}
+.cora-imp-log:empty {
+    display: none;
+}
+/* Size set on each line and its spans: legacy odb li / span rules otherwise
+   win over the list (15px) */
+.cora-imp-progress .cora-imp-log li,
+.cora-imp-progress .cora-imp-log li span {
+    font-size: 12px;
+}
+.cora-imp-progress .cora-imp-log li {
+    display: flex;
+    gap: 10px;
+    padding: 1px 10px;
+    border-left: 3px solid transparent;
+    font-size: 12px;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+}
+.cora-imp-log-time {
+    flex: 0 0 auto;
+    color: #adb5bd;
+}
+.cora-imp-log-row {
+    flex: 0 0 auto;
+    min-width: 72px;
+    font-weight: 600;
+}
+.cora-imp-log-msg {
+    min-width: 0;
+    word-break: break-word;
+}
+.cora-imp-log li.is-ok {
+    border-left-color: #198754;
+    color: #146c43;
+}
+.cora-imp-log li.is-warn {
+    border-left-color: #ffc107;
+    background: #fffbeb;
+    color: #664d03;
+}
+.cora-imp-log li.is-error {
+    border-left-color: #dc3545;
+    background: #fdf2f3;
+    color: #b02a37;
+}
+.cora-imp-log li.cora-imp-log-more {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Step 2: file column -> contact field rows */
+.cora-imp-map-head,
+.cora-imp-map-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr) 20px;
+    align-items: center;
+    gap: 12px;
+}
+.cora-imp-map-head {
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6c757d;
+}
+.cora-imp-map-row + .cora-imp-map-row {
+    margin-top: 8px;
+}
+.cora-imp-map-src {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #f4f6f8;
+}
+.cora-imp-map-src > .bi {
+    color: #198754;
+    font-size: 16px;
+}
+.cora-imp-map-name {
+    overflow: hidden;
+    font-weight: 500;
+    color: #212529;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cora-imp-map-sample {
+    overflow: hidden;
+    font-size: 12px;
+    color: #6c757d;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cora-imp-map-arrow {
+    color: #6c757d;
+    text-align: center;
+}
+.cora-imp-map-state {
+    font-size: 16px;
+    text-align: center;
+}
+.cora-imp-map-row.is-skipped .cora-imp-map-src {
+    opacity: 0.55;
+}
+/* Import page: a field label reads above its help line (the global
+   .form-label is 12px, smaller than Bootstrap's .form-text) */
+.cora-imp-step .form-label,
+#cora-imp-field-modal .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-imp-step .form-text,
+#cora-imp-field-modal .form-text {
+    font-size: 12px;
+}
+#cora-imp-field-options {
+    height: 110px;
+    min-height: 110px;
+    resize: vertical;
+}
+/* "Create custom field" under an unmatched column's select */
+.cora-imp-map-new {
+    display: none;
+    margin-top: 4px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #0d6efd;
+    font-size: 12px;
+}
+.cora-imp-map-new:hover {
+    text-decoration: underline;
+}
+.cora-imp-map-row.is-skipped .cora-imp-map-new {
+    display: inline-flex;
+    align-items: center;
+}
+.min-w-0 {
+    min-width: 0;
+}
+@media (max-width: 575.98px) {
+    .cora-imp-map-head {
+        display: none;
+    }
+    .cora-imp-map-row {
+        grid-template-columns: minmax(0, 1fr) 20px;
+    }
+    .cora-imp-map-arrow {
+        display: none;
+    }
+    .cora-imp-map-row .cora-imp-target {
+        grid-column: 1;
+    }
+    .cora-imp-map-row + .cora-imp-map-row {
+        margin-top: 16px;
+    }
+}
+.cora-imp-section + .cora-imp-section {
+    margin-top: 24px;
+}
+.cora-imp-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-imp-section-title > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #e7f1ff;
+    color: #0a5aa8;
+    font-size: 12px;
+    font-weight: 700;
+}
+.cora-imp-narrow {
+    max-width: 420px;
+}
+/* Upload file / Paste switch */
+.cora-imp-seg {
+    display: inline-flex;
+    margin-bottom: 12px;
+    padding: 3px;
+    border-radius: 8px;
+    background: #f1f3f5;
+}
+.cora-imp-seg button {
+    padding: 5px 14px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: #495057;
+    font-size: 13px;
+    font-weight: 500;
+}
+.cora-imp-seg button.active {
+    background: #fff;
+    color: #0a5aa8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.cora-imp-file-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: 1px solid #badbcc;
+    border-radius: 8px;
+    background: #f1f9f4;
+    font-size: 13px;
+}
+.cora-imp-file-chip > .bi {
+    font-size: 18px;
+    color: #198754;
+}
+.cora-imp-file-name {
+    flex-grow: 1;
+    min-width: 0;
+    word-break: break-all;
+}
+.cora-imp-file-chip .btn-close {
+    font-size: 10px;
+}
+.cora-imp-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e9ecef;
+}
+/* Step 1 side column: template download + checklist */
+.cora-imp-aside {
+    padding: 14px 16px;
+    border: 1px solid #e3e8ef;
+    border-radius: 10px;
+    background: #fbfcfe;
+}
+.cora-imp-aside-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-imp-aside-title > .bi {
+    font-size: 18px;
+    color: #0a5aa8;
+}
+.cora-imp-guide-item {
+    border-top: 1px solid #e9ecef;
+}
+.cora-imp-guide-item > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #212529;
+    cursor: pointer;
+    list-style: none;
+}
+.cora-imp-guide-item > summary::-webkit-details-marker {
+    display: none;
+}
+.cora-imp-guide-item > summary::after {
+    content: "\F282"; /* bi-chevron-down */
+    font-family: "bootstrap-icons";
+    font-size: 11px;
+    color: #6c757d;
+    transition: transform 0.15s ease;
+}
+.cora-imp-guide-item[open] > summary::after {
+    transform: rotate(180deg);
+}
+.cora-imp-guide-item ul {
+    margin-bottom: 10px;
+    padding-left: 18px;
+    font-size: 12.5px;
+    color: #495057;
+}
+.cora-imp-guide-item li + li {
+    margin-top: 4px;
+}
+
+/* Calendar: a day with more than one send / reservation (calendar/calendar.js) */
+/* Seven equal day columns whatever the content: a long newsletter name is cut
+   with an ellipsis (full name in the title tooltip) instead of widening the
+   column. */
+.cora-calendar {
+    width: 100%;
+    table-layout: fixed;
+}
+.cora-calendar th,
+.cora-calendar td {
+    width: calc(100% / 7);
+    overflow: hidden;
+}
+.cora-calendar .cora-pill {
+    max-width: 100%;
+}
+.cora-calendar td.cora-cal-conflict {
+    background-color: #fff8e1;
+    box-shadow: inset 0 0 0 2px #ffc107;
+}
+
+/* Segment condition builder (js/cora-crud.js type: 'rules') */
+.cora-rules-help {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f4f8ff;
+    color: #495057;
+    font-size: 12px;
+    line-height: 1.5;
+}
+/* odb's common CSS sizes every div; keep the hint text at 12px. */
+.cora-rules-help div,
+.cora-rules-help strong {
+    font-size: 12px;
+}
+.cora-rules-help .bi {
+    margin-top: 1px;
+    color: #0b5ed7;
+}
+.cora-rules-match-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+.cora-rule-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.2fr) auto;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background: #fbfcfe;
+}
+/* Condition groups: plain while there is one, boxed from two, joined by an
+   AND / OR separator that follows the outer all / any select. */
+.cora-rule-group {
+    margin-bottom: 10px;
+}
+.cora-rule-group.is-multi {
+    margin-bottom: 16px;
+    padding: 10px 10px 2px;
+    border: 1px solid #dbe4f0;
+    border-radius: 10px;
+    background: #f7f9fc;
+}
+.cora-rule-group > .cora-rules-add {
+    margin: -2px 0 8px;
+    padding: 2px 4px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+.cora-rule-group-head .cora-rule-group-title {
+    font-weight: 600;
+}
+.cora-rule-group-del {
+    padding: 0 4px;
+    font-size: 12px;
+    text-decoration: none;
+}
+.cora-rule-group-sep {
+    width: max-content;
+    margin: -20px auto 8px;
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: #e7f0ff;
+    color: #0b5ed7;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.cora-rule-group-sep[hidden] {
+    display: none;
+}
+.cora-rules-add-group {
+    width: 100%;
+    margin-top: 2px;
+    padding: 6px 12px;
+    border: 1px dashed #b6c4d8;
+    border-radius: 8px;
+    background: transparent;
+    color: #495057;
+    font-size: 13px;
+}
+.cora-rules-add-group:hover,
+.cora-rules-add-group:focus-visible {
+    border-color: #0b5ed7;
+    background: #f4f8ff;
+    color: #0b5ed7;
+}
+.cora-rule-value-wrap:empty::after {
+    content: "No value needed";
+    font-size: 12px;
+    color: #adb5bd;
+}
+.cora-rules-count {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f4f6f8;
+    font-size: 13px;
+}
+.cora-rules-count.is-ok {
+    background: #eef8f2;
+    color: #146c43;
+}
+.cora-rules-count.is-warn {
+    background: #fff8e1;
+    color: #664d03;
+}
+.cora-rules-sample {
+    margin-top: 2px;
+    overflow: hidden;
+    font-size: 12px;
+    color: #6c757d;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+@media (max-width: 575.98px) {
+    .cora-rule-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .cora-rule-row .cora-rule-op,
+    .cora-rule-row .cora-rule-value-wrap {
+        grid-column: 1;
+    }
+}
+
+/* Settings > Users & permissions (settings/users.php): sizes copied from
+   atem/access_control/index.php's inline styles */
+.cora-users-page .cora-pill {
+    font-size: 12px;
+}
+.cora-users-panel-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+.cora-users-page .alert,
+.cora-users-page .alert span {
+    font-size: 12px;
+}
+.cora-users-search {
+    position: relative;
+}
+/* Staff search box: atem's Select2 single selection look */
+#cora-users-search {
+    height: 38px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #212529;
+}
+.cora-users-results {
+    position: absolute;
+    z-index: 20;
+    top: 100%;
+    right: 0;
+    left: 0;
+    max-height: 240px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: #fff;
+    list-style: none;
+    font-size: 12px;
+}
+.cora-users-results li[data-i] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 8px;
+    padding: 6px;
+    cursor: pointer;
+}
+.cora-users-results li[data-i]:hover {
+    background-color: #0d6efd;
+    color: #fff;
+}
+.cora-users-results li[data-i]:hover .cora-users-results-meta {
+    color: #e7f1ff;
+}
+/* Every span in a result (name, department, "No access", role pill): the
+   legacy odb span rule is 15px otherwise */
+.cora-users-results span {
+    font-size: 12px;
+}
+.cora-users-results-meta {
+    grid-column: 1;
+    color: #6c757d;
+}
+.cora-users-results-role {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
+}
+.cora-users-results-empty {
+    padding: 6px;
+    font-size: 12px;
+}
+/* atem .staff-info-box */
+.cora-users-info {
+    padding: 12px 14px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: #f8f9fa;
+}
+.cora-users-info,
+.cora-users-info p,
+.cora-users-info strong,
+.cora-users-info span {
+    font-size: 12px;
+}
+.cora-users-info p {
+    margin-bottom: 4px;
+}
+/* atem .grade-list radios (page.css strips the native radio look) */
+.cora-users-roles .form-check {
+    margin-bottom: 6px;
+    padding-left: 1.75rem;
+}
+.cora-users-roles .form-check-label {
+    font-size: 12px;
+    cursor: pointer;
+}
+.cora-users-roles .form-check-input[type="radio"] {
+    width: 1em !important;
+    height: 1em !important;
+    margin-top: 0.25em;
+    border: 1px solid #adb5bd !important;
+    background-color: #fff !important;
+    cursor: pointer;
+    -webkit-appearance: radio !important;
+    -moz-appearance: radio !important;
+    appearance: radio !important;
+}
+.cora-users-roles .form-check-input[type="radio"]:checked {
+    border-color: #0d6efd !important;
+    background-color: #0d6efd !important;
+}
+
+/* Settings > Integrations & API: Amazon SES status card body at 12px (atem
+   detail text size). Set on every element - legacy odb td / span rules are
+   15px otherwise. Labels left-aligned like atem's info boxes. */
+#cora-ses-body,
+#cora-ses-body *,
+#cora-ses-panel .cora-card-hint,
+#cora-ses-panel .cora-card-hint * {
+    font-size: 12px;
+}
+#cora-ses-body th {
+    text-align: left;
+}
+
+/* Files > Upload images dialog (assets/index.php + assets/upload.js),
+   after the "Upload Photos" reference design */
+.cora-up-dialog {
+    max-width: 560px;
+}
+.cora-up {
+    padding: 28px 32px 24px;
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(20, 40, 90, 0.12);
+}
+.cora-up-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.cora-up-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-up-drop {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 190px;
+    padding: 24px 16px;
+    border: 1.5px dashed #aab4c3;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.cora-up-drop:hover {
+    border-color: #0a5aa8;
+}
+.cora-up-drop.is-over {
+    border-color: #0a5aa8;
+    background: #eaf2ff;
+}
+/* Stacked picture tiles, like the reference artwork */
+.cora-up-art {
+    position: relative;
+    width: 72px;
+    height: 58px;
+    margin-bottom: 8px;
+}
+.cora-up-art .bi {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 46px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 26px;
+}
+.cora-up-art .bi:first-child {
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, #8fb3ff, #5b8def);
+    opacity: 0.7;
+}
+.cora-up-art .bi:last-child {
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #6f9dff, #3f6fd8);
+    box-shadow: 0 6px 14px rgba(63, 111, 216, 0.3);
+}
+.cora-up-drop-text {
+    font-size: 13px;
+    color: #212529;
+}
+.cora-up-browse {
+    color: #0a5aa8;
+    font-weight: 500;
+}
+.cora-up-drop-over {
+    display: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0a5aa8;
+}
+.cora-up-drop.is-over .cora-up-drop-text,
+.cora-up-drop.is-over .cora-up-hint {
+    display: none;
+}
+.cora-up-drop.is-over .cora-up-drop-over {
+    display: block;
+}
+.cora-up-hint {
+    font-size: 11px;
+    color: #8a94a6;
+}
+.cora-up-list {
+    max-height: 250px;
+    margin: 12px 0 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+}
+.cora-up-list:empty {
+    display: none;
+}
+.cora-up-item {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 6px 12px;
+    padding: 12px;
+    border: 1px solid #e3e8ef;
+    border-radius: 10px;
+}
+.cora-up-item + .cora-up-item {
+    margin-top: 8px;
+}
+.cora-up-thumb {
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #eef2f7;
+    color: #8a94a6;
+}
+.cora-up-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.cora-up-info {
+    min-width: 0;
+}
+.cora-up-name,
+.cora-up-meta {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cora-up-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1d3b73;
+}
+.cora-up-meta {
+    font-size: 11px;
+    color: #8a94a6;
+}
+.cora-up-item.is-failed .cora-up-meta {
+    color: #dc3545;
+}
+.cora-up-state .bi-check-lg {
+    font-size: 18px;
+}
+.cora-up-icon-btn {
+    padding: 2px 4px;
+    border: 0;
+    background: none;
+    color: #6c757d;
+}
+.cora-up-icon-btn.is-cancel {
+    color: #dc3545;
+}
+.cora-up-bar {
+    grid-column: 1 / 3;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: #eef2f7;
+}
+.cora-up-bar-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: 2px;
+    background: #1d4b9a;
+    transition: width 0.2s ease;
+}
+.cora-up-item.is-failed .cora-up-bar {
+    visibility: hidden;
+}
+.cora-up-pct {
+    font-size: 10px;
+    color: #8a94a6;
+    text-align: right;
+}
+.cora-up-or {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+    font-size: 11px;
+    color: #adb5bd;
+}
+.cora-up-or::before,
+.cora-up-or::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid #e3e8ef;
+}
+.cora-up-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #212529;
+}
+.cora-up-url {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 12px;
+    border-radius: 8px;
+    background: #f4f6f9;
+}
+.cora-up-url input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    font-size: 13px;
+    outline: none;
+}
+.cora-up-url .btn {
+    background: #fff;
+}
+.cora-up-url .btn:hover,
+.cora-up-url .btn:focus-visible {
+    background: #6c757d;
+    color: #fff;
+}
+.cora-up-url-error {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #dc3545;
+}
+.cora-up-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+.cora-up-foot .btn {
+    min-width: 96px;
+}
+.cora-up-state {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.cora-up-rename {
+    height: 26px;
+    padding: 2px 8px;
+    font-size: 13px;
+}
+/* Files > Edit: preview of the image being edited */
+.cora-asset-edit-preview {
+    margin-bottom: 16px;
+    padding: 8px;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+    background: #f4f6f9;
+    text-align: center;
+}
+.cora-asset-edit-preview img {
+    max-width: 100%;
+    max-height: 240px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* ---------------------------------------------------------------
+   Dialogs (js/cora-confirm.js: coraConfirm / coraAlert / coraPrompt):
+   coloured top bar, tinted icon circle, grey footer, tinted action
+--------------------------------------------------------------- */
+.cora-dlg-dialog {
+    max-width: 520px;
+}
+.cora-dlg {
+    --dlg-main: #0a5aa8;
+    --dlg-tint: #e7f1ff;
+    --dlg-dark: #0a4a8a;
+    overflow: hidden;
+    border: 0;
+    border-top: 5px solid var(--dlg-main);
+    border-radius: 6px;
+    box-shadow: 0 18px 40px rgba(20, 30, 50, 0.18);
+}
+.cora-dlg-danger  { --dlg-main: #dc3545; --dlg-tint: #fde8ea; --dlg-dark: #b02a37; }
+.cora-dlg-warning { --dlg-main: #f0b429; --dlg-tint: #fdf3d7; --dlg-dark: #7a5a00; }
+.cora-dlg-success { --dlg-main: #198754; --dlg-tint: #e3f4ea; --dlg-dark: #146c43; }
+.cora-dlg-info    { --dlg-main: #0a5aa8; --dlg-tint: #e7f1ff; --dlg-dark: #0a4a8a; }
+.cora-dlg-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 26px 28px 22px;
+    background: #fff;
+}
+.cora-dlg-icon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--dlg-tint);
+    color: var(--dlg-main);
+    font-size: 22px;
+}
+.cora-dlg-text {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+}
+.cora-dlg-title {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #212529;
+}
+.cora-dlg-msg,
+.cora-dlg-msg * {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #5c6470;
+}
+.cora-dlg-field {
+    margin-top: 14px;
+}
+.cora-dlg-field textarea {
+    font-size: 13px;
+}
+.cora-dlg-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 20px;
+    background: #f6f7f9;
+}
+.cora-dlg-foot .btn {
+    /* Centred again: the left-align rule for dialog text (.cora-dlg *) would
+       otherwise push a short label to the left of the min-width button. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 88px;
+    padding: 7px 16px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.cora-dlg-cancel {
+    background: transparent;
+    color: #495057;
+}
+.cora-dlg-cancel:hover,
+.cora-dlg-cancel:focus-visible {
+    background: #e9ecef;
+    color: #212529;
+}
+.cora-dlg-ok {
+    background: var(--dlg-tint);
+    color: var(--dlg-dark);
+}
+.cora-dlg-ok:hover,
+.cora-dlg-ok:focus-visible {
+    background: var(--dlg-main);
+    color: #fff;
+}
+.cora-dlg-warning .cora-dlg-ok:hover,
+.cora-dlg-warning .cora-dlg-ok:focus-visible {
+    color: #3d2d00;
+}
+
+/* In-page alert banners, after the "Warning!" banner design: soft tinted
+   background, 2px tinted border, dark text in the same hue */
+.cora-container .alert {
+    border-width: 2px;
+    border-radius: 8px;
+}
+.cora-container .alert-warning { border-color: #f7df9a; background: #fffbef; color: #6b4e00; }
+.cora-container .alert-danger  { border-color: #f5c2c7; background: #fff6f7; color: #8f1d2a; }
+.cora-container .alert-success { border-color: #b7e0c6; background: #f4fbf7; color: #115c39; }
+.cora-container .alert-info    { border-color: #b9d4f5; background: #f4f8fe; color: #0a4a8a; }
+/* odb's page.css centres text inside modals; dialogs read left-aligned */
+.cora-dlg,
+.cora-dlg * {
+    text-align: left;
+}
+
+/* ===== Newsletter report (newsletters/report.php): minimalist ===== */
+.cora-rp-pick {
+    margin-bottom: 1.25rem;
+}
+.cora-rp-pick .form-select {
+    max-width: 24rem;
+    font-weight: 600;
+    font-size: 13px;
+    border-color: transparent;
+    background-color: #f4f6f9;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+/* The open list follows the select's size; options stay regular weight. */
+.cora-rp-pick .form-select option { font-size: 13px; font-weight: 400; }
+.cora-rp-pick .form-select:focus { border-color: #86b7fe; background-color: #fff; }
+.cora-rp-meta {
+    margin-top: .4rem;
+    padding-left: .75rem;
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-rp-dot { margin: 0 .5rem; color: #c3c8cf; }
+.cora-rp-notice {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+    font-size: 12px;
+    color: #6c757d;
+    cursor: help;
+}
+.cora-rp-notice[hidden] { display: none; }
+/* odb's shared page.css sizes bare spans; keep the notice text at 12px. */
+.cora-rp-notice span,
+.cora-rp-meta span,
+.cora-rp-more span { font-size: 12px; }
+.cora-rp-notice .bi { color: #0d6efd; }
+.cora-rp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid #edf0f3;
+    border-bottom: 1px solid #edf0f3;
+}
+.cora-rp-stat {
+    padding: 1.1rem 1.25rem;
+}
+.cora-rp-stat + .cora-rp-stat { border-left: 1px solid #edf0f3; }
+.cora-rp-stat-title {
+    font-size: 12px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.cora-rp-stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: .25rem;
+    color: #212529;
+}
+.cora-rp-stat-sub { font-size: 12px; color: #8a929b; }
+.cora-rp-more {
+    margin: .75rem 0 2rem;
+    font-size: 12px;
+    color: #6c757d;
+}
+.cora-rp-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+.cora-rp-heading { font-size: 15px; font-weight: 600; margin: 0; }
+.cora-rp-toolbar .form-select { width: auto; }
+.cora-rp-toolbar .form-control { width: 12rem; }
+/* Recipients table at 12px throughout (header, email, name, time). */
+.cora-rp-table th,
+.cora-rp-table td,
+.cora-rp-table td div,
+.cora-rp-table td .cora-pill { font-size: 12px; }
+.cora-rp-table .cora-rp-sub { color: #8a929b; }
+.cora-rp-empty {
+    text-align: center;
+    color: #8a929b;
+    padding: 3rem 1rem;
+}
+.cora-rp-empty .bi { font-size: 32px; display: block; margin-bottom: .5rem; color: #c3c8cf; }
+@media (max-width: 767.98px) {
+    .cora-rp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cora-rp-stat:nth-child(3) { border-left: 0; }
+    .cora-rp-stat:nth-child(n+3) { border-top: 1px solid #edf0f3; }
+}

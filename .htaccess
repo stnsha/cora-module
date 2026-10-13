@@ -1,0 +1,10 @@
+# CORA module root. Server-side-only files and folders must never be served.
+
+# composer files list dependencies; docs, SQL and logs are not web content.
+<FilesMatch "^(\.env.*|composer\.(json|lock)|.*\.(md|sql|log|bat))$">
+    Require all denied
+</FilesMatch>
+
+# vendor/ (Composer packages), app/ (classes - reached only through
+# <folder>/api.php), sql/ and logs/ are not web content.
+RedirectMatch 404 /(vendor|app|sql|logs)(/|$)
