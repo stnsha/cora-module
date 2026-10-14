@@ -85,7 +85,6 @@ $cora_nav = [
     ],
     ['label' => 'Companies', 'gate' => 'admin', 'href' => 'companies/index.php'],
     ['label' => 'Reports', 'gate' => 'admin', 'href' => 'reports/index.php'],
-    ['label' => 'Audit Log', 'gate' => 'admin', 'href' => 'audit/index.php'],
     [
         'label' => 'Settings',
         'gate'  => 'super',

@@ -24,20 +24,32 @@ require __DIR__ . '/../app/bootstrap.php';
         </div>
 
         <div class="cora-card mb-3" id="cora-imp-result" hidden>
-            <div class="d-flex align-items-start justify-content-between flex-wrap gap-2">
-                <h6 class="cora-card-title mb-0"><i class="bi bi-2-circle"></i> Validation result <span class="text-muted small" id="cora-imp-file-name"></span></h6>
+            <div class="cora-card-title-row flex-wrap gap-2">
+                <div>
+                    <h6 class="cora-card-title"><i class="bi bi-2-circle"></i> Validation result</h6>
+                    <div class="cora-imp-file" id="cora-imp-file-name"></div>
+                </div>
                 <div class="d-flex gap-2" id="cora-imp-actions">
                     <button type="button" class="btn btn-outline-secondary btn-sm" id="cora-imp-discard">Discard</button>
                     <button type="button" class="btn btn-success btn-sm" id="cora-imp-confirm"><i class="bi bi-cloud-check"></i> Confirm upload</button>
                 </div>
             </div>
-            <p class="small mt-2 mb-2" id="cora-imp-headline"></p>
-            <ul class="list-unstyled small mb-3" id="cora-imp-summary"></ul>
-            <div class="d-flex align-items-center gap-2 mb-2">
-                <label class="form-label small mb-0" for="cora-imp-filter">Show rows</label>
-                <select id="cora-imp-filter" class="form-select form-select-sm" style="max-width:280px;"></select>
+
+            <div class="cora-imp-stats">
+                <div class="cora-imp-stat"><div class="cora-imp-stat-label">Records uploaded</div><div class="cora-imp-stat-value" id="cora-imp-total">0</div></div>
+                <div class="cora-imp-stat"><div class="cora-imp-stat-label">Valid</div><div class="cora-imp-stat-value cora-stat-value--green" id="cora-imp-valid">0</div></div>
+                <div class="cora-imp-stat"><div class="cora-imp-stat-label">Need fixing</div><div class="cora-imp-stat-value cora-stat-value--red" id="cora-imp-invalid">0</div></div>
             </div>
-            <?php cora_table('cora-imp', ['Row', 'Company', 'Employee', 'IC / Passport', 'Limit', 'Start', 'End', 'Result'], false); ?>
+            <div class="cora-imp-status" id="cora-imp-headline" hidden></div>
+            <div class="cora-imp-chips" id="cora-imp-summary"></div>
+
+            <div class="cora-imp-filter-row">
+                <label class="form-label mb-0" for="cora-imp-filter">Show rows</label>
+                <select id="cora-imp-filter" class="form-select form-select-sm"></select>
+            </div>
+            <div class="cora-imp-rows-tbl">
+                <?php cora_table('cora-imp', ['Row', 'Company', 'Employee', 'IC / Passport', 'Limit', 'Start', 'End', 'Result'], false); ?>
+            </div>
         </div>
     </div>
 
@@ -54,12 +66,13 @@ require __DIR__ . '/../app/bootstrap.php';
             <a class="btn btn-outline-primary btn-sm" href="<?php echo CORA_BASE; ?>employees/api.php?action=import_template"><i class="bi bi-download"></i> Download CSV template</a>
         </div>
 
-        <div class="cora-card">
-            <h6 class="cora-card-title"><i class="bi bi-clock-history"></i> Recent uploads</h6>
-            <div class="table-responsive">
+        <div class="cora-card" id="cora-imp-pending-card" hidden>
+            <h6 class="cora-card-title"><i class="bi bi-hourglass-split"></i> Awaiting confirmation</h6>
+            <p class="cora-card-hint mb-2">Validated but not yet confirmed or discarded. Open one to finish it.</p>
+            <div class="table-responsive cora-imp-recent-wrap">
                 <table class="table table-sm align-middle cora-view-tbl mb-0">
-                    <thead><tr><th>File</th><th>Rows</th><th>Status</th><th>By</th></tr></thead>
-                    <tbody id="cora-imp-recent"><tr><td colspan="4" class="text-center text-muted py-3">Loading...</td></tr></tbody>
+                    <thead><tr><th>File</th><th>Rows</th><th>By</th></tr></thead>
+                    <tbody id="cora-imp-recent"></tbody>
                 </table>
             </div>
         </div>

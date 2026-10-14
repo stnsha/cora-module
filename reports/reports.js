@@ -81,12 +81,45 @@
         F.company.value = ''; F.outlet.value = ''; F.q.value = ''; F.status.value = ''; F.method.value = '';
         load();
     });
-    el('cora-rp-csv').addEventListener('click', function () {
-        location.href = Cora.url(API, 'report_export', Object.assign({ format: 'csv' }, filters()));
-    });
-    el('cora-rp-xlsx').addEventListener('click', function () {
-        location.href = Cora.url(API, 'report_export', Object.assign({ format: 'xlsx' }, filters()));
-    });
+    /*
+     * The file is fetched (not opened with location.href) so the page knows
+     * when it is ready: a small loading bar shows and both buttons are
+     * disabled until the download starts. A JSON reply means an error.
+     */
+    function exportReport(format) {
+        var buttons = [el('cora-rp-csv'), el('cora-rp-xlsx')];
+        var bar = el('cora-rp-loading');
+        var busy = function (on) {
+            bar.hidden = !on;
+            buttons.forEach(function (b) { b.disabled = on; });
+        };
+        busy(true);
+        fetch(Cora.url(API, 'report_export', Object.assign({ format: format }, filters())), { credentials: 'same-origin' })
+            .then(function (res) {
+                var type = res.headers.get('Content-Type') || '';
+                if (!res.ok || type.indexOf('application/json') === 0) {
+                    return res.json().catch(function () { return {}; }).then(function (body) {
+                        throw new Error(body.message || 'The export could not be created.');
+                    });
+                }
+                var match = /filename="([^"]+)"/.exec(res.headers.get('Content-Disposition') || '');
+                return res.blob().then(function (blob) {
+                    var link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = match ? match[1] : 'cora_claim_report.' + format;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+                });
+            })
+            .catch(function (err) {
+                window.coraAlert(err.message || 'Could not reach the server.', { variant: 'danger' });
+            })
+            .then(function () { busy(false); });
+    }
+    el('cora-rp-csv').addEventListener('click', function () { exportReport('csv'); });
+    el('cora-rp-xlsx').addEventListener('click', function () { exportReport('xlsx'); });
 
     load();
 })();

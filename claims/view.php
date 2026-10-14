@@ -96,7 +96,7 @@ $cora_review = ($_GET['review'] ?? '') === '1' && $cora_is_admin;
         <div class="col-lg-6">
             <div class="cora-card h-100">
                 <h6 class="cora-card-title"><i class="bi bi-clock-history"></i> Timeline</h6>
-                <ul class="list-unstyled small mb-0" id="cora-cv-timeline"></ul>
+                <ul class="list-unstyled small mb-0 cora-timeline" id="cora-cv-timeline"></ul>
             </div>
         </div>
     </div>

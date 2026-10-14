@@ -23,7 +23,7 @@ use Cora\Services\Import\EmployeeImportService;
  *   employees_create / employees_update / employees_delete
  *   import_template                 CSV template download
  *   import_validate   (multipart: file)  stage + validate an upload -> summary
- *   imports_list                    recent uploads
+ *   imports_list                    uploads awaiting confirmation (validated, not confirmed / discarded)
  *   import_rows       ?id= &result=  staged rows of one upload
  *   import_confirm    { id }        write the valid rows (only once validated)
  *   import_discard    { id }
@@ -64,7 +64,7 @@ final class EmployeeController extends Controller
                 }
                 return $import->validate((string) $file['tmp_name'], (string) $file['name']);
             case 'imports_list':
-                return EmployeeImport::where('1 = 1', [], null, 30);
+                return EmployeeImport::where('`status` = ?', [EmployeeImport::VALIDATED], null, 30);
             case 'import_rows':
                 $id = $this->requireId('Upload');
                 $result = (string) $this->request->query('result', '');

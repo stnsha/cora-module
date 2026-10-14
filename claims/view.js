@@ -16,12 +16,56 @@
     var alertEl = el('cora-cv-alert');
     var data = null;
 
+    // Timeline entries read "<staff> <verb> <object>": [verb, object, Bootstrap icon, tone].
     var ACTIONS = {
-        draft_created: 'Draft created', draft_updated: 'Draft updated', submitted: 'Submitted',
-        resubmitted: 'Resubmitted after amendment', amended: 'Amended by outlet', review_started: 'Review started',
-        approved: 'Approved', rejected: 'Rejected', returned_for_amendment: 'Returned for amendment',
-        cancelled: 'Cancelled', voided: 'Voided (approved claim reversed)'
+        draft_created:          ['created', 'a draft', 'bi-file-earmark-plus', 'grey'],
+        draft_updated:          ['updated', 'the draft', 'bi-pencil', 'grey'],
+        submitted:              ['submitted', 'the claim', 'bi-send', 'blue'],
+        resubmitted:            ['resubmitted', 'the claim after amendment', 'bi-arrow-repeat', 'blue'],
+        amended:                ['amended', 'the claim', 'bi-pencil', 'blue'],
+        review_started:         ['started reviewing', 'the claim', 'bi-eye', 'blue'],
+        approved:               ['approved', 'the claim', 'bi-check-lg', 'green'],
+        rejected:               ['rejected', 'the claim', 'bi-x-lg', 'red'],
+        returned_for_amendment: ['returned', 'the claim for amendment', 'bi-arrow-return-left', 'amber'],
+        cancelled:              ['cancelled', 'the claim', 'bi-slash-circle', 'red'],
+        voided:                 ['voided', 'the approved claim', 'bi-x-octagon', 'red']
     };
+
+    // Edited fields of a draft update / amendment: "Label: old -> new".
+    function changesList(changes) {
+        if (!changes || !changes.length) { return ''; }
+        return '<ul class="cora-act-changes">' + changes.map(function (c) {
+            return '<li><span class="cora-act-field">' + Cora.esc(c.label) + '</span>' +
+                '<span class="cora-act-from">' + Cora.esc(c.from) + '</span>' +
+                '<i class="bi bi-arrow-right"></i>' +
+                '<span class="cora-act-to">' + Cora.esc(c.to) + '</span></li>';
+        }).join('') + '</ul>';
+    }
+
+    function timelineItem(t) {
+        var a = ACTIONS[t.action] || [String(t.action).replace(/_/g, ' '), '', 'bi-dot', 'grey'];
+        return '<li class="cora-act">' +
+            '<span class="cora-act-icon cora-act-' + a[3] + '"><i class="bi ' + a[2] + '"></i></span>' +
+            '<div class="cora-act-body">' +
+            '<div class="cora-act-text"><span class="cora-act-strong">' + Cora.esc(t.staff_name || '-') + '</span> ' +
+            Cora.esc(a[0]) + (a[1] ? ' <span class="cora-act-strong">' + Cora.esc(a[1]) + '</span>' : '') + '</div>' +
+            changesList(t.changes) +
+            (t.remark ? '<div class="cora-act-remark">' + Cora.lines(t.remark) + '</div>' : '') +
+            '<div class="cora-act-time">' + Cora.esc(longDateTime(t.created_at)) + '</div>' +
+            '</div></li>';
+    }
+
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+
+    /** 'd-m-Y H:i:s' (API display) -> '14 October 2026 at 3:24 PM'; anything else is shown as given. */
+    function longDateTime(v) {
+        var m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})/.exec(v || '');
+        if (!m) { return v || '-'; }
+        var h = parseInt(m[4], 10);
+        return parseInt(m[1], 10) + ' ' + MONTHS[parseInt(m[2], 10) - 1] + ' ' + m[3] +
+            ' at ' + (h % 12 || 12) + ':' + m[5] + ' ' + (h < 12 ? 'AM' : 'PM');
+    }
 
     function row(label, value) {
         return '<tr><th class="text-muted fw-normal" style="width:40%;">' + Cora.esc(label) + '</th><td>' + value + '</td></tr>';
@@ -106,10 +150,12 @@
         el('cora-cv-criteria').innerHTML = '<strong>Benefit / claim criteria:</strong><br>' + (rules.benefit_criteria ? Cora.lines(rules.benefit_criteria) : '<span class="text-muted">None recorded.</span>');
         el('cora-cv-remark').innerHTML = '<strong>General remark:</strong><br>' + (rules.general_remark ? Cora.lines(rules.general_remark) : '<span class="text-muted">None recorded.</span>');
 
-        el('cora-cv-timeline').innerHTML = d.timeline.length ? d.timeline.map(function (t) {
-            return '<li class="mb-2"><div><strong>' + Cora.esc(ACTIONS[t.action] || t.action) + '</strong> - ' + Cora.esc(t.staff_name || '-') + '</div>' +
-                '<div class="text-muted">' + Cora.esc(t.created_at) + '</div>' + (t.remark ? '<div>' + Cora.lines(t.remark) + '</div>' : '') + '</li>';
-        }).join('') : '<li class="text-muted">No activity recorded.</li>';
+        var timeline = el('cora-cv-timeline');
+        timeline.innerHTML = d.timeline.length
+            ? d.timeline.map(timelineItem).join('')
+            : '<li class="text-muted">No activity recorded.</li>';
+        // Oldest first, so open a scrolled timeline at the latest entry.
+        timeline.scrollTop = timeline.scrollHeight;
 
         el('cora-cv-history').innerHTML = d.history.length ? d.history.map(function (h, i) {
             return '<tr><td class="text-muted">' + (i + 1) + '</td><td>' + Cora.esc(h.claim_no) + '</td><td>' + Cora.esc(h.visit_date) + '</td>' +

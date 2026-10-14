@@ -2,7 +2,7 @@
  * Upload Employees (employees/import.php).
  * employees/api.php: import_validate (multipart file) -> the staged upload
  * and its summary; import_rows (?id, result) for the table; import_confirm /
- * import_discard; imports_list for Recent uploads. Confirm is only offered
+ * import_discard; imports_list for uploads awaiting confirmation. Confirm is only offered
  * once validation has completed and at least one row is valid.
  */
 (function () {
@@ -54,18 +54,34 @@
         current = imp;
         var s = imp.summary || {};
         var valid = (s.valid_new || 0) + (s.valid_update || 0);
-        el('cora-imp-file-name').textContent = '- ' + imp.file_name;
-        el('cora-imp-headline').innerHTML = '<strong>' + imp.total_rows.toLocaleString() + '</strong> records uploaded, <strong class="text-success">' +
-            valid.toLocaleString() + '</strong> valid' + (imp.status === 1 ? '' : ' - ' + Cora.esc(STATUS[imp.status][0]));
+        el('cora-imp-file-name').innerHTML = '<i class="bi bi-file-earmark-text"></i> ' + Cora.esc(imp.file_name);
+        el('cora-imp-total').textContent = imp.total_rows.toLocaleString();
+        el('cora-imp-valid').textContent = valid.toLocaleString();
+        el('cora-imp-invalid').textContent = (imp.total_rows - valid).toLocaleString();
+        // Confirmed / discarded uploads say so above the breakdown.
+        var st = STATUS[imp.status];
+        el('cora-imp-headline').hidden = imp.status === 1;
+        el('cora-imp-headline').innerHTML = imp.status === 1 || !st ? '' : 'This upload is ' + Cora.pill(st[1], st[0]);
         el('cora-imp-summary').innerHTML = Object.keys(RESULTS).filter(function (k) { return s[k]; }).map(function (k) {
-            return '<li>' + Cora.pill(RESULTS[k].cls, s[k].toLocaleString()) + ' ' + Cora.esc(RESULTS[k].label) + '</li>';
+            return '<span class="cora-imp-chip">' + Cora.pill(RESULTS[k].cls, s[k].toLocaleString()) + ' ' + Cora.esc(RESULTS[k].label) + '</span>';
         }).join('');
         var open = imp.status === 1;
-        el('cora-imp-actions').hidden = !open;
+        // d-flex (display: flex !important) beats [hidden], so toggle d-none.
+        el('cora-imp-actions').classList.toggle('d-none', !open);
         el('cora-imp-confirm').disabled = valid === 0;
         el('cora-imp-confirm').innerHTML = '<i class="bi bi-cloud-check"></i> Confirm ' + valid.toLocaleString() + ' valid row' + (valid === 1 ? '' : 's');
         resultEl.hidden = false;
         loadRows();
+    }
+
+    // Back to a blank page (no result, no file chosen) once an upload is finished.
+    function resetForm() {
+        current = null;
+        resultEl.hidden = true;
+        el('cora-imp-form').reset();
+        filterEl.value = '';
+        rowsEl.innerHTML = '';
+        Cora.alertBox(alertEl, null);
     }
 
     function loadRows() {
@@ -77,16 +93,17 @@
     }
     filterEl.addEventListener('change', loadRows);
 
+    // Uploads validated but not yet confirmed / discarded; the card hides when there are none.
     function loadRecent() {
         Cora.call(API, 'imports_list').then(function (res) {
             var list = (res.success && res.data) || [];
-            el('cora-imp-recent').innerHTML = list.length ? list.map(function (i) {
-                var st = STATUS[i.status] || ['-', 'cora-pill-secondary'];
-                return '<tr data-id="' + i.id + '" style="cursor:pointer;" title="Show this upload">' +
-                    '<td class="small">' + Cora.esc(i.file_name) + '<div class="text-muted">' + Cora.esc(i.created_at) + '</div></td>' +
-                    '<td>' + i.total_rows + '</td><td>' + Cora.pill(st[1], st[0]) + '</td>' +
-                    '<td class="small">' + Cora.esc(i.created_by_name || '-') + '</td></tr>';
-            }).join('') : '<tr><td colspan="4" class="text-center text-muted py-3">No uploads yet.</td></tr>';
+            el('cora-imp-pending-card').hidden = list.length === 0;
+            el('cora-imp-recent').innerHTML = list.map(function (i) {
+                return '<tr data-id="' + i.id + '" style="cursor:pointer;" title="Open this upload">' +
+                    '<td>' + Cora.esc(i.file_name) + '<div class="text-muted small">' + Cora.esc(i.created_at) + '</div></td>' +
+                    '<td>' + i.total_rows + '</td>' +
+                    '<td>' + Cora.esc(i.created_by_name || '-') + '</td></tr>';
+            }).join('');
         });
     }
     el('cora-imp-recent').addEventListener('click', function (e) {
@@ -131,7 +148,7 @@
             Cora.call(API, 'import_confirm', { method: 'POST', body: { id: current.id } }).then(function (res) {
                 if (!res.success) { window.coraAlert(Cora.firstError(res), { variant: 'danger' }); return; }
                 window.coraAlert(res.data.created + ' employee(s) created, ' + res.data.updated + ' updated.', { variant: 'success', title: 'Upload confirmed' });
-                showImport(res.data);
+                resetForm();
                 loadRecent();
             });
         }, { title: 'Confirm upload', variant: 'success', confirmLabel: 'Confirm' });

@@ -32,6 +32,25 @@ use Cora\Services\Masking;
  */
 final class ClaimController extends Controller
 {
+    /** Timeline entries that show what was edited (from / to). */
+    private const EDIT_ACTIONS = ['draft_updated', 'amended', 'resubmitted'];
+
+    /**
+     * Claim fields the outlet can edit, in form order: field => [label, format].
+     * Snapshots, timestamps and status are left out of the timeline.
+     */
+    private const EDITED_FIELDS = [
+        'outlet_name'     => ['Outlet', 'text'],
+        'visit_date'      => ['Visit date', 'text'],
+        'so_no'           => ['Sales Order No.', 'text'],
+        'total_amount'    => ['Purchase amount', 'money'],
+        'payment_method'  => ['Payment method', 'payment'],
+        'claim_amount'    => ['Corporate claim', 'money'],
+        'self_pay_amount' => ['Self-pay', 'money'],
+        'claim_type'      => ['Claim type', 'text'],
+        'remark'          => ['Remark', 'text'],
+    ];
+
     private const FIELDS = ['employee_id', 'outlet_id', 'visit_date', 'so_no', 'total_amount', 'claim_amount', 'payment_method', 'claim_type', 'remark', 'authorise_duplicate'];
 
     protected function handle(string $action): mixed
@@ -60,6 +79,34 @@ final class ClaimController extends Controller
                 return $workflow->returnForAmendment($this->requireId('Claim'), $this->remark('Tell the outlet what to correct.'));
         }
         $this->unknown();
+    }
+
+    /**
+     * Audit diff { field: [before, after] } -> [{ label, from, to }] for the
+     * editable claim fields, formatted for display ('-' for empty).
+     *
+     * @param array<string, array{0: mixed, 1: mixed}>|null $changes
+     * @return list<array{label: string, from: string, to: string}>
+     */
+    private static function editedFields(?array $changes): array
+    {
+        $format = static fn (mixed $v, string $type): string => match (true) {
+            $v === null || $v === ''               => '-',
+            $type === 'money'                      => 'RM' . number_format((float) $v, 2),
+            $type === 'payment'                    => Claim::PAYMENT_METHODS[(int) $v] ?? (string) $v,
+            default                                => (string) $v,
+        };
+
+        $out = [];
+        foreach (self::EDITED_FIELDS as $field => [$label, $type]) {
+            if (!isset($changes[$field]) || !is_array($changes[$field])) {
+                continue;
+            }
+            [$from, $to] = $changes[$field] + [null, null];
+            $out[] = ['label' => $label, 'from' => $format($from, $type), 'to' => $format($to, $type)];
+        }
+
+        return $out;
     }
 
     /** @return list<int>|null */
@@ -138,6 +185,7 @@ final class ClaimController extends Controller
             'remark'     => $a['remark'],
             'staff_name' => $a['staff_name'],
             'created_at' => $a['created_at'],
+            'changes'    => in_array($a['action'], self::EDIT_ACTIONS, true) ? self::editedFields($a['changes'] ?? null) : [],
         ], AuditLog::forRecord('claim', $id));
 
         $status = (int) $claim['status'];

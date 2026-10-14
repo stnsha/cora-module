@@ -3,9 +3,12 @@ $page_title = 'Monthly Claim Report';
 $page_subtitle = 'Claims by visitation month. Filter by company, outlet, employee, claim status or payment method, then export to Excel or CSV.';
 $page_access = 'admin';
 require __DIR__ . '/../partials.php';
-$page_title_actions = '<div class="d-flex gap-2">'
+$page_title_actions = '<div class="cora-rp-export">'
+    . '<div class="d-flex gap-2">'
     . '<button type="button" class="btn btn-outline-primary d-inline-flex align-items-center" id="cora-rp-csv"><i class="bi bi-filetype-csv me-1"></i>Export CSV</button>'
     . '<button type="button" class="btn btn-primary d-inline-flex align-items-center" id="cora-rp-xlsx"><i class="bi bi-file-earmark-excel me-1"></i>Export Excel</button>'
+    . '</div>'
+    . '<div class="cora-loading-bar" id="cora-rp-loading" hidden><span></span></div>'
     . '</div>';
 include __DIR__ . '/../header.php';
 $page_js = CORA_BASE . 'reports/reports.js';

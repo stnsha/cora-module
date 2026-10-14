@@ -128,6 +128,102 @@
         return m ? m[3] + '-' + m[2] + '-' + m[1] : (v || '');
     }
 
+    /*
+     * Form validation for every CORA page: the browser's bubble ("Please
+     * select a file.") is switched off (novalidate) and each invalid field
+     * gets a small red message under it instead. Runs in the capture phase,
+     * so an invalid form never reaches the page's own submit handler. Uses
+     * the HTML attributes already on the fields (required, minlength, type,
+     * min / max, pattern); hidden and disabled fields are skipped.
+     */
+    function fieldLabel(field) {
+        var label = field.id ? document.querySelector('label[for="' + field.id + '"]') : null;
+        var text = label ? label.textContent.replace(/\*/g, '').trim() : '';
+        return text || 'This field';
+    }
+
+    function fieldMessage(field) {
+        var v = field.validity;
+        if (v.valueMissing) {
+            if (field.type === 'file') { return 'Choose a file.'; }
+            if (field.tagName === 'SELECT') { return 'Select ' + fieldLabel(field).toLowerCase() + '.'; }
+            return fieldLabel(field) + ' is required.';
+        }
+        if (v.typeMismatch && field.type === 'email') { return 'Enter a valid email address.'; }
+        if (v.tooShort) { return 'Enter at least ' + field.minLength + ' characters.'; }
+        if (v.rangeUnderflow) { return 'Must be ' + field.min + ' or more.'; }
+        if (v.rangeOverflow) { return 'Must be ' + field.max + ' or less.'; }
+        if (v.badInput || v.typeMismatch || v.patternMismatch || v.stepMismatch) { return 'Enter a valid value.'; }
+        return field.validationMessage;
+    }
+
+    // The message sits after the field, or after its .input-group wrapper.
+    function errorAnchor(field) {
+        return field.closest('.input-group') || field;
+    }
+
+    function clearFieldError(field) {
+        field.classList.remove('is-invalid');
+        var next = errorAnchor(field).nextElementSibling;
+        if (next && next.classList.contains('cora-field-error')) { next.remove(); }
+    }
+
+    function showFieldError(field, message) {
+        clearFieldError(field);
+        field.classList.add('is-invalid');
+        var box = document.createElement('div');
+        box.className = 'cora-field-error';
+        box.textContent = message;
+        errorAnchor(field).insertAdjacentElement('afterend', box);
+    }
+
+    function validateForm(form) {
+        var first = null;
+        Array.prototype.forEach.call(form.elements, function (field) {
+            if (!field.willValidate || field.offsetParent === null) { return; }
+            if (field.checkValidity()) { clearFieldError(field); return; }
+            showFieldError(field, fieldMessage(field));
+            first = first || field;
+        });
+        if (first) { first.focus(); }
+        return first === null;
+    }
+
+    function noBubbles(root) {
+        Array.prototype.forEach.call((root || document).querySelectorAll('form'), function (form) {
+            form.noValidate = true;
+        });
+    }
+
+    document.addEventListener('submit', function (e) {
+        var form = e.target;
+        if (!(form instanceof HTMLFormElement) || form.hasAttribute('data-cora-no-validate')) { return; }
+        if (!validateForm(form)) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }
+    }, true);
+
+    // Editing a field clears its message.
+    ['input', 'change'].forEach(function (type) {
+        document.addEventListener(type, function (e) {
+            var field = e.target;
+            if (field && field.classList && field.classList.contains('is-invalid') && field.checkValidity()) {
+                clearFieldError(field);
+            }
+        }, true);
+    });
+
+    // Forms added later (dialogs) never got novalidate: suppress the bubble
+    // the browser is about to show and use the inline message instead.
+    document.addEventListener('invalid', function (e) {
+        e.preventDefault();
+        showFieldError(e.target, fieldMessage(e.target));
+    }, true);
+
+    noBubbles(document);
+    document.addEventListener('DOMContentLoaded', function () { noBubbles(document); });
+
     window.Cora = {
         BASE: BASE,
         CLAIM_STATUS: CLAIM_STATUS,
@@ -142,6 +238,9 @@
         alertBox: alertBox,
         lines: lines,
         today: today,
-        toInputDate: toInputDate
+        toInputDate: toInputDate,
+        validateForm: validateForm,
+        showFieldError: showFieldError,
+        clearFieldError: clearFieldError
     };
 })();
